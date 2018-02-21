@@ -29,11 +29,11 @@
                      for (let i = 0; i < data.length; i++) {
                          let $newRow = $('<tr>');
                          let $surname = $('<td>').append(data[i].surname);
-                         let $name = $('<td>').text(data[i].name);
-                         let $pass = $('<td>').text(data[i].password);
-        
+                         let $name = $('<td>').text(data[i].firstname);
+                         let $username = $('<td>').text(data[i].username);
+        //surname,firstname,username,user_passwor
                          // APPEND  
-                         $newRow.append($name).append($surname).append($pass);
+                         $newRow.append($name).append($surname).append($username);
                          $tbody.append($newRow)
                      }
 
@@ -57,7 +57,7 @@
             <tr>
                 <th>Surname</th>
                 <th>Name</th>
-                <th>Password</th>
+                <th>Username</th>
             </tr>
         </thead>
         <tbody id='table'>
