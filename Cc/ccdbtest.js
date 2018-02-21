@@ -2,10 +2,10 @@ function getRecords(callback) {
 	var result = {};
 	var mysql = require('mysql');
 	var connection = mysql.createConnection({
-		host     : '81.241.232.193',
-		user     : 'oldimb1q_kab',
-		password : 'JSkab123',
-		database : 'oldimb1q_kab',
+		host: 'localhost', //	host     : '81.241.232.193',
+		user: 'root',  //		user     : 'oldimb1q_kab',
+		password: 'root', //    password : 'JSkab123',
+		database: 'kab', //     database : 'oldimb1q_kab'
 		port: 3306
 	});
 
