@@ -2,7 +2,7 @@ function getRecords(callback) {
 	var result = {};
 	var mysql = require('mysql');
 	var connection = mysql.createConnection({
-		host     : '81.241.232.193',
+		host     : '195.238.74.102',
 		user     : 'oldimb1q_kab',
 		password : 'JSkab123',
 		database : 'oldimb1q_kab',
