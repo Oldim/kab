@@ -1,10 +1,8 @@
-
-
 function getRecords(callback) {
 	var result = {};
 	var mysql = require('mysql');
 	var connection = mysql.createConnection({
-		host     : 'localhost',
+		host     : '81.241.232.193',
     user     : 'oldimb1q_kab',
     password : 'JSkab123',
 		database : 'oldimb1q_kab',
