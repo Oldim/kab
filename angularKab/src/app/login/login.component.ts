@@ -1,50 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from './service';
-import { User } from './user';
+﻿import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { AlertService, AuthenticationService } from '../_services/index';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    moduleId: module.id.toString(),
+    templateUrl: 'login.component.html'
 })
+
 export class LoginComponent implements OnInit {
-  baseLink: string = 'http://localhost:1337/kab/user';
-  surname: string;
-  firstname: string;
-  username: string;
-  password: string;
+    model: any = {};
+    loading = false;
+    returnUrl: string;
 
-  constructor(private userService: UserService) {
-    
-   }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) { }
 
-  ngOnInit() {
-    this.userService.getUser(this.baseLink).subscribe(
-      data => {
-        console.log(data);
-      });
-  }
- 
-  register(): void {
-    console.log('register() func ok!');
-    let chloe: User = new User(this.surname, this.firstname, this.username, this.password);
-    console.log(chloe);
-    
-    
-  }
+    ngOnInit() {
+        // reset login status
+        this.authenticationService.logout();
 
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
+    login() {
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
 }
-
-
-//___________________________________________________________________________
-
-// let wout: User = new User('Philipsen', 'Wout', 'Woutje', 'pasW1');
-
-
-export class Users {
-  allusers = [];
-  constructor(public user:User){}
-}
-
-// let userzz:Users = new Users(wout);
