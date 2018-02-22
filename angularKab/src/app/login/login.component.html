@@ -1,9 +1,27 @@
+<form #frmGebruiker="ngForm">
 <fieldset class="login">
   <legend>Landingspagina</legend>
-  <label>Username: <input type="text" name="name" size="30" maxlength="100"></label>
+
+ <!--  <label>Surname: <input type="text" name="name" size="30" maxlength="100"></label> -->
+  <label>Surname:<input type="text" name="surname" #gebruiker="ngModel" [(ngModel)]="surname" required size="30" maxlength="100"></label>
   <br><br><br>
-  <label>Password: <input type="text" name="name" size="30" maxlength="100"></label>
+
+ <!--  <label>firstname: <input type="text" name="name" size="30" maxlength="100"></label> -->
+  <label>firstname:<input type="text" name="firstname" #gebruiker="ngModel" [(ngModel)]="firstname" required size="30" maxlength="100"></label>
   <br><br><br>
-  <input type="button" value="Login" class="btn">
-  <input type="button" value="Register" class="btn">
+
+ <!-- <label>Username: <input type="text" name="name" size="30" maxlength="100"></label> -->
+  <label>Username: <input type="text" name="username" #gebruiker="ngModel" [(ngModel)]="username" required size="30" maxlength="100"></label>
+  <br><br><br>
+
+ <!--  <label>Password: <input type="text" name="name" size="30" maxlength="100"></label> -->
+  <label>Password: <input type="text" name="password" #gebruiker="ngModel" [(ngModel)]="password" required size="30" maxlength="100"></label>
+  <br><br><br>
+  
+  <input type="button" value="Login" class="btn" (click)="login()">
+  <input type="button" value="Register" class="btn" (click)="register()">
 </fieldset>
+</form>
+
+
+ 

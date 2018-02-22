@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './service';
+import { User } from './user';
 
 @Component({
   selector: 'login',
@@ -7,8 +8,12 @@ import { UserService } from './service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  baseLink: string = 'http://localhost:1337/kab/user';
+  surname: string;
+  firstname: string;
+  username: string;
+  password: string;
 
-  baseLink: string = 'http://localhost:1337/kab/user'
   constructor(private userService: UserService) {
     
    }
@@ -19,5 +24,27 @@ export class LoginComponent implements OnInit {
         console.log(data);
       });
   }
+ 
+  register(): void {
+    console.log('register() func ok!');
+    let chloe: User = new User(this.surname, this.firstname, this.username, this.password);
+    console.log(chloe);
+    
+    
+  }
+
 
 }
+
+
+//___________________________________________________________________________
+
+// let wout: User = new User('Philipsen', 'Wout', 'Woutje', 'pasW1');
+
+
+export class Users {
+  allusers = [];
+  constructor(public user:User){}
+}
+
+// let userzz:Users = new Users(wout);
