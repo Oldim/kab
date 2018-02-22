@@ -1,0 +1,27 @@
+.login {
+    border: 5px solid #187923;
+    padding: 20px;
+    width: 670px;
+    height: 200px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btn {
+
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    padding: 1em 2em;
+    border: 1px solid #666;
+    margin: .5em 0;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btn:hover {
+    background: #096e28;
+    color: #333;
+}
