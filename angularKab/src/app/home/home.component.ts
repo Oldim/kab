@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     }
 
     deleteUser(id: number) {
-        this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+        // this.userService.delete(id).subscribe(() => { this.loadAllUsers() }); HIER ZIT NOG EEN FOUTJE OP DE DELETE: IK KREEG FAILED TO COMPILE
     }
 
     private loadAllUsers() {
