@@ -1,15 +1,24 @@
+﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
-import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './login/service';
+import { FormsModule }    from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers/index';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { AppComponent }  from './app.component';
+import { routing }        from './app.routing';
 
+import { AlertComponent } from './_directives/index';
+import { AuthGuard } from './_guards/index';
+import { JwtInterceptor } from './_helpers/index';
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { HomeComponent } from './home/index';
+import { LoginComponent } from './login/index';
+import { RegisterComponent } from './register/index';
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [
     AppComponent,
     LoginComponent,
@@ -21,5 +30,36 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [UserService],
   bootstrap: [LoginComponent]
+=======
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent
+    ],
+    providers: [
+        AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+
+        // provider used to create fake backend
+        fakeBackendProvider
+    ],
+    bootstrap: [AppComponent]
+>>>>>>> 0f10b80fa72e9e97b2b40259e4707b50b1107473
 })
+
 export class AppModule { }
