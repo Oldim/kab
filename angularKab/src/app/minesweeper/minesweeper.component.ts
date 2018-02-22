@@ -13,7 +13,7 @@ export class MinesweeperComponent implements OnInit {
 
   }
   alert(){
-    alert("juuuu");
+    alert()
   }
 
 }
