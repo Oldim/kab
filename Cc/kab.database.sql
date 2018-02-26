@@ -24,7 +24,8 @@ INSERT INTO user (surname,firstname,username ,user_password) VALUES ('Wout','Phi
 INSERT INTO user (surname,firstname,username,user_password) VALUES ('Chloe','Claes', 'Cc', 'chloe12580');
 INSERT INTO user (surname,firstname,username,user_password) VALUES ('Dmytri','Oflrenko','Dims', 'dimi12580');
 
-SELECT * FROM user;
+DELETE FROM user
+WHERE ID > 3;
 
 DROP TABLE user;
 
