@@ -1,0 +1,26 @@
+<!--      START SCREEN TASKS      -->
+<h3>Welcome to your task organiser!</h3>
+
+
+
+<!--     CREATE & EDIT CATEGORY    -->
+<div id="create-edit">
+  <form>
+    <label for="cat">Category: </label>
+    <input type="text" id="category" [(ngModel)]="cat" name="cat">
+    <button class="createbtn" (click)="createCategory()"> + </button>
+  </form>
+</div>
+
+
+
+<!--     CATEGORY ASSEMBLY      -->
+<div id="categorylist">
+{{variable}}
+
+
+
+
+  
+<span id="span">You have no categories to organise...</span>
+</div>

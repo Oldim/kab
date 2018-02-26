@@ -16,7 +16,13 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+<<<<<<< HEAD
 import { MinesweeperComponent } from './minesweeper/minesweeper.component';
+=======
+import { TasksComponent } from './tasks/tasks.component';
+import { GameComponent } from './game/game.component';
+import { CategoryService } from './tasks/category.service';
+>>>>>>> cc
 
 @NgModule({
     imports: [
@@ -31,13 +37,15 @@ import { MinesweeperComponent } from './minesweeper/minesweeper.component';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        MinesweeperComponent
+        TasksComponent,
+        GameComponent
     ],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,
+        CategoryService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
