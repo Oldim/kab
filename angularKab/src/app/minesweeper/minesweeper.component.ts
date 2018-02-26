@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MinesweeperGame } from './model/MineSweeperGame';
 
 @Component({
   selector: 'minesweeper',
@@ -6,14 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./minesweeper.component.css']
 })
 export class MinesweeperComponent implements OnInit {
+  game: MinesweeperGame;
 
-  constructor() { }
+  constructor() {
+   
+   }
 
   ngOnInit() {
+    this.game = new MinesweeperGame();
+  }
 
+  targetClick() {
+    console.dir(this.game.grid);
   }
-  alert(){
-    alert()
-  }
+
 
 }

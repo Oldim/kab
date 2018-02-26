@@ -1,7 +1,10 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <h1>Sweep mines like a boss</h1> -->
+<!-- Aantal rijen: <input type="number" class="rows" name="rows" [(ngModel)]="rijen" required />
+Aantal kolommen: <input type="number" class="columns" name="columns" [(ngModel)]="kolommen" required /> -->
+<div id="board">
 
-<h1>Sweep mines like a boss</h1>
-Aantal rijen: <input type="number" class="rows" name="rows" [(ngModel)]="rijen" required />
-Aantal kolommen: <input type="number" class="columns" name="columns" [(ngModel)]="kolommen" required />
-    <div id="board"></div>
-    <input type="button" (click)="alert();">
+    <div *ngFor="let rij of game.grid.squares, let i=index">
+        <button [ngClass]="'btn'" *ngFor="let kolom of game.grid.squares[0], let j = index" (click)="game.grid.flagSquare(i,j);targetClick();">
+                {{ game.grid.squares[i][j].State }}</button>
+    </div>
+</div>
