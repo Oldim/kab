@@ -1,6 +1,22 @@
-﻿<div class="col-md-6 col-md-offset-3">
+﻿   <!-- SECOND PAGE / AFTER LOGIN  --> 
+
+   <!-- Greeting User --> 
+<div class="col-md-6 col-md-offset-3">
     <h1>Hi {{currentUser.firstName}}!</h1>
-    <p>You're logged in with Angular 2/5 and Webpack!!</p>
+    <p>You're logged in KABproductions!!</p>
+
+    <!-- LINK TO TASK & LINK TO GAME --> 
+    <h3>Navigation</h3>
+   <ul>
+       <li>
+           <a routerLink="/tasks">Tasks</a>
+       </li>
+       <li>
+           <a routerLink="/game">Minesweeper</a>
+       </li>
+   </ul>
+
+    <!-- ALL REGISTERED USERS --> 
     <h3>All registered users:</h3>
     <ul>
         <li *ngFor="let user of users">
@@ -8,5 +24,6 @@
             - <a (click)="deleteUser(user.id)">Delete</a>
         </li>
     </ul>
+       <!-- LOGOUT --> 
     <p><a [routerLink]="['/login']">Logout</a></p>
 </div>

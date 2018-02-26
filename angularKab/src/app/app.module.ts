@@ -16,6 +16,9 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import { TasksComponent } from './tasks/tasks.component';
+import { GameComponent } from './game/game.component';
+import { CategoryService } from './tasks/category.service';
 
 @NgModule({
     imports: [
@@ -29,13 +32,16 @@ import { RegisterComponent } from './register/index';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        TasksComponent,
+        GameComponent
     ],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,
+        CategoryService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
