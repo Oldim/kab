@@ -5,6 +5,7 @@ import { AlertService, AuthenticationService } from '../_services/index';
 
 @Component({
     moduleId: module.id.toString(),
+    selector: 'login',
     templateUrl: 'login.component.html'
 })
 
