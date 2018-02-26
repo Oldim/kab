@@ -1,117 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Mijnenveger</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<style>
-    #wrapper {
-        background-color: orange;
-        height: 600px;
-    }
-
-    #wrapper > .header {
-        height: 50px;
-        color: paleturquoise;
-    }
-
-    #wrapper > .playfield {
-        height: 450px;
-        background-color: white;
-        border: 1px solid black;
-    }
-
-    .nested {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-gap: 1em;
-    }
-    .nested>div {
-        border: #333 1px solid;
-        padding: 1em;
-    }
-</style>
 <body>
-    <div id="wrapper">
-        <header class="header">Mijnenveger</header>
-        <main class="playfield">playfield
-            <div class="nested">
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-                <div>LOREM</div>
-            </div>
-        </main>
-    </div>
+    <h1>Sweep mines like a boss</h1>
+    <div id="board"></div>
+    <script src="main.js"></script>
 </body>
+
 </html>

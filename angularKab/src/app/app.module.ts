@@ -16,20 +16,22 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import { MinesweeperComponent } from './minesweeper/minesweeper.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        routing
+        routing,
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        MinesweeperComponent
     ],
     providers: [
         AuthGuard,
@@ -45,7 +47,7 @@ import { RegisterComponent } from './register/index';
         // provider used to create fake backend
         fakeBackendProvider
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [MinesweeperComponent]
 })
 
 export class AppModule { }
