@@ -61,6 +61,9 @@ app.get('/user', function (req, res) {
 });
 
 
+//----------------------------------------------------------
+// LOGIN USERS OUT DATABASE 
+//----------------------------------------------------------
 
 app.post('/authenticate', function (req, res) {
     console.log('post request send');
@@ -134,6 +137,26 @@ app.post('/createUser', function (req, res) {
         //     console.log('Error while performing query.');
         // }
         res.end("res.end() POST ok!\n check SQL database if data is added. ");
+        connection.end();
+    });
+});
+
+
+//--------------------------------------------------------
+// POST + NEW CATEGORY
+//--------------------------------------------------------
+
+app.post('/createCategory', function (req, res) {
+    console.log("Express server... ");
+    let connection = makeConnection();
+    let requ= JSON.parse(Object.keys(req.body)[0]);
+    console.log(requ);
+
+   // requ.ID
+    connection.query('INSERT INTO category (description, ID) VALUES ("'+ requ.cat_description + '","'+2+'")', function (err, rows, fields) {
+        console.log('app.post ( SQL TYPESCRIPT category...)');
+
+        res.send({message: "res.end() POST category ok!\n check SQL database if data is added. "});
         connection.end();
     });
 });
