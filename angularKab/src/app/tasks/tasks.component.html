@@ -8,24 +8,21 @@
   <form>
     <label for="cat">Category: </label>
     <input type="text" id="category" [(ngModel)]="cat" name="cat">
-    <button class="createbtn" (click)="createCategory()"> + </button>
+    <button class="createbtn" (click)="createCategoryInDatabank()"> + </button>
   </form>
 </div>
 
 
 
 <!--     CATEGORY ASSEMBLY      -->
+<div id="categorylist">
 
-{{variable}}
-
-<div class="cat-wrapper">
-
-    <h3>Categorylist</h3>
-    <div id="categorylist">
-
-      
-
-
-    <!-- laat deze span even staan aub ^_^ -->
-    <span id="span">You have no categories to organise...</span>
+  <div *ngFor="let c of categories"  class="cattab">
+    <span class="cat_title" (click)="editTitle()">{{c.cat_description}}</span>
+    <button class="deletebtn" (click)="deletebtn(c)"> x </button>
   </div>
+
+
+
+  <span *ngIf = "categories.length === 0" id="span">You have no categories to organise...</span>
+</div>
