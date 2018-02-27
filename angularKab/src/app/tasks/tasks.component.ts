@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from './category.service';
 
 
+import { User } from '../_models/index';
+import { UserService } from '../_services/index';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -19,7 +22,10 @@ const httpOptions = {
 export class TasksComponent implements OnInit {
   cat: string;
   variable: string;
-  constructor(private categoryService: CategoryService) { }
+  currentUser: User;
+  constructor(private categoryService: CategoryService, private userService: UserService) { 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
   }
@@ -29,10 +35,11 @@ export class TasksComponent implements OnInit {
     this.createMap(this.cat);
     let category: Category = new Category();
     category.cat_description = this.cat;
+    category.ID = this.currentUser.id;
 
 
     // SEND TO EXPRESS SERVER 
-    console.log(category, httpOptions);
+    console.log(this.currentUser.id, category, httpOptions);
 
     this.categoryService.create(category);
     //this.http.post('http://127.0.0.1:1337/createCategory/', category, httpOptions);

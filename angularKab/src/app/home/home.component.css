@@ -1,0 +1,31 @@
+.login {
+    border: 5px solid #187923;
+    padding: 20px;
+    width: 670px;
+    height: 200px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btn {   
+    padding: 10px 45px;
+    background: #ec4b3b;
+    color: #fff;
+    border: 1px #ec4b3b solid;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btn:hover {
+    background: none;
+    color: #ec4b3b;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+}

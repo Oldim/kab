@@ -96,7 +96,7 @@ app.post('/authenticate', function (req, res) {
                 // res.end(result)
                 res.send({ status: 200, body: body });
             } else {
-                res.send({message: 'Password is incorrect: '});
+                res.send({ message: 'Password is incorrect: ' });
             }
 
         }
@@ -149,14 +149,14 @@ app.post('/createUser', function (req, res) {
 app.post('/createCategory', function (req, res) {
     console.log("Express server... ");
     let connection = makeConnection();
-    let requ= JSON.parse(Object.keys(req.body)[0]);
+    let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log(requ);
 
-   // requ.ID
-    connection.query('INSERT INTO category (description, ID) VALUES ("'+ requ.cat_description + '","'+2+'")', function (err, rows, fields) {
+    // requ.ID
+    connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT category...)');
-
-        res.send({message: "res.end() POST category ok!\n check SQL database if data is added. "});
+        console.log(req.body);
+        res.send({ message: "res.end() POST category ok!\n check SQL database if data is added. " });
         connection.end();
     });
 });
