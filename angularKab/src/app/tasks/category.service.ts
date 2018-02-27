@@ -22,14 +22,29 @@ const httpOptions = {
 export class CategoryService {
     constructor(private http: HttpClient) { }
 
-
+    //---------------------
+    // CREATE CATEGORY 
+    //---------------------
     create(category: Category) {
-        console.log('injectab');
-
         this.http.post('http://127.0.0.1:1337/createCategory/', category, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
-            // TODO
+        },
+            err => console.log(err.message));
+    }
+
+    //---------------------
+    // DELETE CATEGORY
+    //---------------------
+    delete(category: Category) {             
+        let id = category.cat_id;
+        console.log('delete()  cat.service.ts');
+        console.log('category.cat_id: ', category.cat_id);
+        console.log('category: ', category);
+        
+        this.http.delete('http://127.0.0.1:1337/deleteCategory/:'+id+'', httpOptions
+        ).subscribe(antw => {
+            console.dir(antw);
         },
             err => console.log(err.message));
     }
