@@ -25,9 +25,9 @@ export class UserService {
         return this.http.get<User[]>('http://127.0.0.1:1337/user');
     }
 
-  /*  getById(id: number) {
-        return this.http.get('/api/users/' + id);
-    } */
+    getById(id: number) {
+        return this.http.get('http://127.0.0.1:1337/user' + id);
+    } 
 
     create(user: User) {
         return this.http.post('http://127.0.0.1:1337/createUser', user, httpOptions);

@@ -70,7 +70,7 @@ app.post('/createUser', function (req, res) {
     let requ= JSON.parse(Object.keys(req.body)[0]);
     //console.log(requ);
    
-    connection.query('INSERT INTO user (surname,firstname,username ,user_password) VALUES ("'+ requ.lastName + '" ,"'+ requ.firstName + '","'+ requ.username + '","'+ requ.password + '")', function (err, rows, fields) {
+    connection.query('INSERT INTO user (surname,firstname,username ,password) VALUES ("'+ requ.lastName + '" ,"'+ requ.firstName + '","'+ requ.username + '","'+ requ.password + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT...)');
 
         // let result;
