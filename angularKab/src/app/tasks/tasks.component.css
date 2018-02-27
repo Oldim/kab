@@ -22,46 +22,27 @@
     padding-top: 100px;
 }
 
+.ng-untouched.ng-pristine.ng-valid {
+    margin-bottom: 30px;
+}
+
  /* --------------------------------------------------*/
 
- 
-.cat-wrapper {
-  padding: 2em;
-  background-color: white;
-  min-height: calc(100% - 4em);
-  display: inline-block;
+.cattab {
+    display: inline-block;
+    background-color: #eee;
+    width: 120px;
+    height: 100px;
+    border: solid 1px lightgrey;
+    margin-left: 18px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
-h2 { 
-  color: #333;
-  font-weight: 700; 
-  /*font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif; */
-  line-height: 20px;
-  font-size: 12pt;
+.cat_title {
+    color: rgb(53, 112, 223);
 }
 
-.category {
-  background-color: #0079BF;
-  height: 72px;
-  width: 280px;
-  color: white;
-  float: left;
-  margin-right: 16px;
-  margin-bottom: 16px;
-  text-align: left;
-  padding: 9pt 8px;
-  border-radius: 3px;
-  text-decoration: none;
-}
-
-.category .title {
-  font-weight: 700; 
-  /*font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif; */
-  line-height: 20px;
-  font-size: 12pt;
-}
-
-.add-cat {
-  background-color: #e2e4e6;
-  color: #8c8c8c;
+.deletebtn{
+    float:  right;
 }

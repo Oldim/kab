@@ -152,7 +152,7 @@ app.post('/createCategory', function (req, res) {
     let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log(requ);
 
-    connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + 2 + '")', function (err, rows, fields) {
+    connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT category...)');
 
         // mariaDB LASTINDEXOF om cat_id terug te krijgen voor Delete
