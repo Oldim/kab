@@ -34,6 +34,8 @@ import { CategoryService } from './tasks/category.service';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
+        TasksComponent, 
+        GameComponent,
         // MinesweeperComponent
     ],
     providers: [

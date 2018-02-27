@@ -15,12 +15,21 @@
 
 
 <!--     CATEGORY ASSEMBLY      -->
-<div id="categorylist">
+
 {{variable}}
 
+<div class="cat-wrapper">
+
+    <h2>Categorylist</h2>
+    <div id="categorylist">
+
+        <a class="category" *ngFor="let cati of categories" [routerLink]="">
+        <span class="title">{{cat?.title}}</span></a>
+
+      <a href="#" class="add-cat" (click)="addCategory()">
+      <span class="title">Create a new category...</span></a>
 
 
-
-  
-<span id="span">You have no categories to organise...</span>
-</div>
+    <!-- laat deze span even staan aub ^_^ -->
+    <span id="span">You have no categories to organise...</span>
+  </div>
