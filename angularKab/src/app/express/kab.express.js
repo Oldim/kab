@@ -61,16 +61,69 @@ app.get('/user', function (req, res) {
 });
 
 
+//----------------------------------------------------------
+// LOGIN USERS OUT DATABASE 
+//----------------------------------------------------------
+
+app.post('/authenticate', function (req, res) {
+    console.log('post request send');
+    let body = {};
+    let connection = makeConnection();
+    //console.log(req.body);
+    let requ = JSON.parse(Object.keys(req.body)[0]);
+
+    // var username = requ.username;
+    // var password = requ.password;
+    console.log(requ.username);
+    connection.query('SELECT * FROM user WHERE username=\'' + requ.username + '\'', function (err, rows, fields) {
+        //let requ= req.body;
+        // let requ= JSON.parse(Object.keys(req.body)[0]);
+        //console.log(requ);
+        if (!err) {
+            console.log("req.body-----");
+            console.log(rows[0]);
+            if (rows.length > 0 && requ.username == rows[0].username && requ.password == rows[0].password) {
+                console.log("syaski-masyaski");
+                // let result = JSON.stringify(rows);
+                console.log(requ);
+                body = {
+                    id: rows[0].ID,
+                    username: rows[0].username,
+                    firstName: rows[0].firstname,
+                    lastName: rows[0].surname,
+                    token: 'fake-jwt-token'
+                };
+                // res.end(result)
+                res.send({ status: 200, body: body });
+            } else {
+                res.send({message: 'Password is incorrect: '});
+            }
+
+        }
+        else {
+            //console.log('Password is incorrect: ');
+            res.send('Username is incorrect: ');
+        }
+        // res.end("res.end() POST ok!\n check SQL database if data is added. ");
+        connection.end();
+    });
+});
+
+
+
+
+
+
 //--------------------------------------------------------
 // POST 
 //--------------------------------------------------------
 
 app.post('/createUser', function (req, res) {
     let connection = makeConnection();
-    let requ= JSON.parse(Object.keys(req.body)[0]);
+    let requ = JSON.parse(Object.keys(req.body)[0]);
     //console.log(requ);
-   
-    connection.query('INSERT INTO user (surname,firstname,username ,user_password) VALUES ("'+ requ.lastName + '" ,"'+ requ.firstName + '","'+ requ.username + '","'+ requ.password + '")', function (err, rows, fields) {
+
+    connection.query('INSERT INTO user (surname,firstname,username ,password) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.password + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT...)');
 
         // let result;
@@ -84,6 +137,26 @@ app.post('/createUser', function (req, res) {
         //     console.log('Error while performing query.');
         // }
         res.end("res.end() POST ok!\n check SQL database if data is added. ");
+        connection.end();
+    });
+});
+
+
+//--------------------------------------------------------
+// POST + NEW CATEGORY
+//--------------------------------------------------------
+
+app.post('/createCategory', function (req, res) {
+    console.log("Express server... ");
+    let connection = makeConnection();
+    let requ= JSON.parse(Object.keys(req.body)[0]);
+    console.log(requ);
+
+   // requ.ID
+    connection.query('INSERT INTO category (description, ID) VALUES ("'+ requ.cat_description + '","'+2+'")', function (err, rows, fields) {
+        console.log('app.post ( SQL TYPESCRIPT category...)');
+
+        res.send({message: "res.end() POST category ok!\n check SQL database if data is added. "});
         connection.end();
     });
 });
