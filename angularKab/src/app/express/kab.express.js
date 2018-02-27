@@ -96,7 +96,7 @@ app.post('/authenticate', function (req, res) {
                 // res.end(result)
                 res.send({ status: 200, body: body });
             } else {
-                res.send({message: 'Password is incorrect: '});
+                res.send({ message: 'Password is incorrect: ' });
             }
 
         }
@@ -147,20 +147,36 @@ app.post('/createUser', function (req, res) {
 //--------------------------------------------------------
 
 app.post('/createCategory', function (req, res) {
-    console.log("Express server... ");
+    console.log("Express server /createCategory... ");
     let connection = makeConnection();
-    let requ= JSON.parse(Object.keys(req.body)[0]);
+    let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log(requ);
 
-   // requ.ID
-    connection.query('INSERT INTO category (description, ID) VALUES ("'+ requ.cat_description + '","'+2+'")', function (err, rows, fields) {
+    connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + 2 + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT category...)');
 
-        res.send({message: "res.end() POST category ok!\n check SQL database if data is added. "});
+        // mariaDB LASTINDEXOF om cat_id terug te krijgen voor Delete
+        res.send({ message: "res.end() POST category ok!\n check SQL database if data is added. " });
         connection.end();
     });
 });
 
+
+//--------------------------------------------------------
+// DELETE CATEGORY
+//--------------------------------------------------------
+
+app.delete('/deleteCategory/:cat_id', function (req, res) {
+    console.log("Express server /deleteCategory ");
+    let connection = makeConnection();
+
+    connection.query('DELETE FROM category WHERE cat_id LIKE ' + req.params.cat_id + ''),
+        function (err, rows, fields) {
+            console.log('app.delete ( SQL TYPESCRIPT category...)');
+            res.send({ message: "res.send() delete ok --> Check database !" });
+            connection.end();
+        };
+});
 
 
 //----------------------------------------------------------
