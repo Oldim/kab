@@ -115,7 +115,7 @@ app.post('/authenticate', function (req, res) {
 
 
 //--------------------------------------------------------
-// POST 
+// REGISTER: CREATE NEW USER 
 //--------------------------------------------------------
 
 app.post('/createUser', function (req, res) {
