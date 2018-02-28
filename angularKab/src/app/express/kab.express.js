@@ -115,7 +115,7 @@ app.post('/authenticate', function (req, res) {
 
 
 //--------------------------------------------------------
-// POST 
+// REGISTER: CREATE NEW USER 
 //--------------------------------------------------------
 
 app.post('/createUser', function (req, res) {
@@ -154,9 +154,10 @@ app.post('/createCategory', function (req, res) {
 
     connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT category...)');
-
-        // mariaDB LASTINDEXOF om cat_id terug te krijgen voor Delete
-        res.send({ message: "res.end() POST category ok!\n check SQL database if data is added. " });
+        //--------------------------------------------
+        // CAT_ID: GET BACK IN RESPONSE FOR APP.DELETE()
+        //--------------------------------------------
+        res.send({ message: "New Category added to KAB.database." });
         connection.end();
     });
 });
