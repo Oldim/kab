@@ -3,10 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from './category.service';
 import { User } from '../_models';
 import { UserService } from '../_services/index';
-<<<<<<< HEAD
-=======
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
->>>>>>> 0f5f5d3a05042e4810f091e14af5056767753922
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -71,6 +68,15 @@ export class TasksComponent implements OnInit {
     // }
     
   }
+    //--------------------------------------------
+    // DELETE BUTTON OF CATEGORY TAB
+    //--------------------------------------------
+    editTitle(object){
+      console.log("Auto change all data to object: update databank");
+      
+       // UPDATE DATABANK
+      this.categoryService.create(object);
+    }
 
 }
 
