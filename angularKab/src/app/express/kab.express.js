@@ -41,7 +41,7 @@ app.all('/*', function (req, res, next) {
 //----------------------------------------------------------
 
 app.get('/user', function (req, res) {
-    console.log('get request received');
+    console.log('get /user request received');
 
     let connection = makeConnection();
 
@@ -131,9 +131,30 @@ app.post('/createUser', function (req, res) {
     });
 });
 
+//----------------------------------------------------------
+// GET CATEGORIES OUT OF DATABASE
+//----------------------------------------------------------
+app.get('/getAllCat/:id', function (req, res) {
+    console.log('express:get all categories');
+    let requ = req.params.id;
+    let connection = makeConnection();
+
+    connection.query('SELECT * FROM category WHERE id = "' + requ + '"', function (err, rows, fields) {
+        if (!err) {
+            let result = JSON.stringify(rows);
+            console.log(result);
+
+            res.end(result)
+        }
+        else {
+            console.log('Error while performing query.');
+        }
+        connection.send();
+    });
+});
 
 //--------------------------------------------------------
-// POST + NEW CATEGORY
+// CREATE NEW CATEGORY
 //--------------------------------------------------------
 
 app.post('/createCategory', function (req, res) {
@@ -179,12 +200,6 @@ app.post('/editCategory', function (req, res) {
 
     connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = ' + requ.cat_id , function (err, rows, fields) {
         if (!err) {
-            //----------------------------------
-            // GET ANSWER BACK FOR ID 
-            //----------------------------------
-            console.log(requ);
-            console.log(rows.rowsAffected);
-            // res.send({ message: rows.insertId });
             res.send({ body: body });
             connection.end();
         }
