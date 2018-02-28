@@ -126,16 +126,6 @@ app.post('/createUser', function (req, res) {
     connection.query('INSERT INTO user (surname,firstname,username ,password) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.password + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT...)');
 
-        // let result;
-        // if (!err) {
-        //     let result = JSON.stringify(rows);
-        //     console.log(result);
-
-        //     res.end(result)
-        // }
-        // else {
-        //     console.log('Error while performing query.');
-        // }
         res.end("res.end() POST ok!\n check SQL database if data is added. ");
         connection.end();
     });
@@ -158,7 +148,9 @@ app.post('/createCategory', function (req, res) {
         body = {
             cat_id: rows.insertId
         };
-        // mariaDB LASTINDEXOF om cat_id terug te krijgen voor Delete
+        //----------------------------------
+        // GET ANSWER BACK FOR ID 
+        //----------------------------------
         console.log(requ);
         // res.send({ message: rows.insertId });
         res.send({  body: body });
@@ -166,6 +158,30 @@ app.post('/createCategory', function (req, res) {
     });
 });
 
+
+//--------------------------------------------------------
+// UPDATE CATEGORY
+//--------------------------------------------------------
+
+app.post('/editCategory', function (req, res) {
+    let body = {};
+    console.log("Express server /editCategory... ");
+    let connection = makeConnection();
+    let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log(requ);
+    
+
+    connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = "' + requ.ID + '")', function (err, rows, fields) {
+        
+        //----------------------------------
+        // GET ANSWER BACK FOR ID 
+        //----------------------------------
+        console.log(requ);
+        // res.send({ message: rows.insertId });
+        res.send({  body: body });
+        connection.end();
+    });
+});
 
 //--------------------------------------------------------
 // DELETE CATEGORY

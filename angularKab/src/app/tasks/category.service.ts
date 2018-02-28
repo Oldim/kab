@@ -33,6 +33,17 @@ export class CategoryService {
         },
             err => console.log(err.message));
     }
+    //---------------------
+    // UPDATE CATEGORY
+    //---------------------
+    edit(category: Category) {
+        this.http.post<any>('http://127.0.0.1:1337/editCategory/', category, httpOptions
+        ).subscribe(antw => {
+            console.dir(antw);
+
+        },
+            err => console.log(err.message));
+    }
 
     //---------------------
     // DELETE CATEGORY

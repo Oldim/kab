@@ -55,16 +55,16 @@ export class TasksComponent implements OnInit {
     console.log(obj.cat_id);
     this.categoryService.delete(obj);
     this.categories.splice(this.categories.indexOf(obj),1);
-
-    
   }
+
+
   //--------------------------------------------
   // SAVE BUTTON UPDATE CATEGORY IN DATABASE
   //--------------------------------------------
   editTitle(object){
     console.log("Auto change all data to object: update databank");
    // UPDATE DATABANK
-    this.categoryService.create(object);
+    this.categoryService.edit(object);
   }
 
 }
