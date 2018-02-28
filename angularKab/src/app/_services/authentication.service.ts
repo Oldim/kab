@@ -7,8 +7,8 @@ import 'rxjs/add/operator/map'
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
-    login(username: string, password: string) {
-        return this.http.post<any>('http://127.0.0.1:1337/authenticate', { username: username, password: password },
+    login(username: string, wachtwoord: string) {
+        return this.http.post<any>('http://127.0.0.1:1337/authenticate', { username: username, wachtwoord: wachtwoord },
         { headers: new HttpHeaders({
             /**/ 'Content-Type':  'application/x-www-form-urlencoded',  
           })})

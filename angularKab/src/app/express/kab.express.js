@@ -73,7 +73,7 @@ app.post('/authenticate', function (req, res) {
     let requ = JSON.parse(Object.keys(req.body)[0]);
 
     // var username = requ.username;
-    // var password = requ.password;
+    // var wachtwoord = requ.wachtwoord;
     console.log(requ.username);
     connection.query('SELECT * FROM user WHERE username=\'' + requ.username + '\'', function (err, rows, fields) {
         //let requ= req.body;
@@ -82,12 +82,12 @@ app.post('/authenticate', function (req, res) {
         if (!err) {
             console.log("req.body-----");
             console.log(rows[0]);
-            if (rows.length > 0 && requ.username == rows[0].username && requ.password == rows[0].password) {
+            if (rows.length > 0 && requ.username == rows[0].username && requ.wachtwoord == rows[0].wachtwoord) {
                 console.log("syaski-masyaski");
                 // let result = JSON.stringify(rows);
                 console.log(requ);
                 body = {
-                    id: rows[0].ID,
+                    id: rows[0].id,
                     username: rows[0].username,
                     firstName: rows[0].firstname,
                     lastName: rows[0].surname,
@@ -123,7 +123,7 @@ app.post('/createUser', function (req, res) {
     let requ = JSON.parse(Object.keys(req.body)[0]);
     //console.log(requ);
 
-    connection.query('INSERT INTO user (surname,firstname,username ,password) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.password + '")', function (err, rows, fields) {
+    connection.query('INSERT INTO user (surname,firstname,username ,wachtwoord) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.wachtwoord + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT...)');
 
         res.end("res.end() POST ok!\n check SQL database if data is added. ");
@@ -144,16 +144,22 @@ app.post('/createCategory', function (req, res) {
     //console.log(requ);
 
     connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
-        console.log('app.post ( SQL TYPESCRIPT category...)');
-        body = {
-            cat_id: rows.insertId
-        };
-        //----------------------------------
-        // GET ANSWER BACK FOR ID 
-        //----------------------------------
-        console.log(requ);
-        // res.send({ message: rows.insertId });
-        res.send({  body: body });
+        if (!err) {
+            console.log('app.post ( SQL TYPESCRIPT category...)');
+            body = {
+                cat_id: rows.insertId
+            };
+            //----------------------------------
+            // GET ANSWER BACK FOR ID 
+            //----------------------------------
+            console.log(requ);
+            // res.send({ message: rows.insertId });
+            res.send({ body: body });
+        }
+        else {
+            console.log(err.message);
+            res.send({ body: err.message });
+        }
         connection.end();
     });
 });
@@ -169,17 +175,23 @@ app.post('/editCategory', function (req, res) {
     let connection = makeConnection();
     let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log(requ);
-    
 
-    connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = "' + requ.ID + '")', function (err, rows, fields) {
-        
-        //----------------------------------
-        // GET ANSWER BACK FOR ID 
-        //----------------------------------
-        console.log(requ);
-        // res.send({ message: rows.insertId });
-        res.send({  body: body });
-        connection.end();
+
+    connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = ' + requ.cat_id , function (err, rows, fields) {
+        if (!err) {
+            //----------------------------------
+            // GET ANSWER BACK FOR ID 
+            //----------------------------------
+            console.log(requ);
+            console.log(rows.rowsAffected);
+            // res.send({ message: rows.insertId });
+            res.send({ body: body });
+            connection.end();
+        }
+        else {
+            console.log(err.message);
+            res.send({ body: err.message });
+        }
     });
 });
 
