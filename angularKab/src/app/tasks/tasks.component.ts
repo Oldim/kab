@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from './category.service';
+import { SubCategoryService } from './subCategory.service';
 import { User } from '../_models';
 import { UserService } from '../_services/index';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
@@ -23,9 +24,11 @@ export class TasksComponent implements OnInit {
   cat: string;
   cat_id: number;
   category: Category;
+  subCategory: Subcat;
   categories: Category[] = [];
+  subCategories: Subcat[] = [];
 
-  constructor(private categoryService: CategoryService, private userService: UserService) {
+  constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService, private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -46,6 +49,19 @@ export class TasksComponent implements OnInit {
     this.categories.push(category);
     // SEND ALL TO CATEGORY.SERVICE.TS TO create()
     this.categoryService.create(category);
+  }
+
+
+    //--------------------------------------------
+  // ADDS Sub-CATEGORY TO DATABANK -> subCategory.service.ts
+  //--------------------------------------------
+  createSubCat(): void {
+    let subCategory: Subcat = new Subcat();
+
+    subCategory.subCat_description = this.cat;    
+    this.subCategories.push(subCategory);
+
+    this.subCategoryService.createSub(subCategory);
   }
 
   //--------------------------------------------
@@ -84,6 +100,7 @@ export class Category {
 
 export class Subcat {
   subcat_id: number;
+  subCat_description: string;
   cat_id: string;
   constructor() { }
 }

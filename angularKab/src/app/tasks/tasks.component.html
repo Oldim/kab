@@ -22,6 +22,7 @@
     <span class="cat_title">{{c.cat_description}}</span>
     <button class="deletebtn" (click)="deletebtn(c)"> x </button>
     <button class="editbtn" (click)="show = !show">edit </button>
+    <button class="btnAddSubCat" (click)="createSubCat()">Add subcategory </button>
 
     <!-- VISIBLE WHEN IN EDIT MODUS -->
     <div *ngIf="show">

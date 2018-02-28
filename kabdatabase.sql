@@ -23,7 +23,7 @@ DELETE FROM user
 WHERE id > 3;
 
 DROP TABLE user;
-
+DROP DATABASE kab;
 
 -- ----------------------TABEL MET CATEGORY  ------------------------------------------
 CREATE TABLE category (
@@ -54,10 +54,11 @@ WHERE cat_id = 7;
 
 -- --------------------------------- SUB CATEGORY  ------------------------------------------
 CREATE TABLE subcat (
-    subcat_id int,
+    subcat_id int AUTO_INCREMENT,,
+    subCat_description varchar(500) NOT NULL,
     cat_id int,
     PRIMARY KEY (subcat_id),
-    FOREIGN KEY (cat_id) REFERENCES category (cat_id),
+
     FOREIGN KEY (subcat_id) REFERENCES category (cat_id)
 );
 
@@ -67,8 +68,8 @@ DROP TABLE subcat;
 INSERT INTO category (description, id) VALUES ('Gamen', '2'); -- chloe = 2
 INSERT INTO category (description, id) VALUES ('Training', '1');  -- wout = 1
 
-INSERT INTO subcat (subcat_id, cat_id) VALUES ('2', '2'); -- 2 = hobby + chloe = 2
-INSERT INTO subcat (subcat_id, cat_id) VALUES ('1', '1'); -- 1 = sport + wout = 1
+INSERT INTO subcat (subcat_id, subCat_description, cat_id) VALUES ('2','test', '2'); -- 2 = hobby + chloe = 2
+INSERT INTO subcat (subcat_id, subCat_description, cat_id) VALUES ('1','dfgdfg', '1'); -- 1 = sport + wout = 1
 
 SELECT * FROM subcat;
 

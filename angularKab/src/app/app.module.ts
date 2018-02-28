@@ -20,6 +20,8 @@ import { RegisterComponent } from './register/index';
 import { TasksComponent } from './tasks/tasks.component';
 import { GameComponent } from './game/game.component';
 import { CategoryService } from './tasks/category.service';
+import { SubCategoryService } from './tasks/subCategory.service';
+
 
 @NgModule({
     imports: [
@@ -34,7 +36,7 @@ import { CategoryService } from './tasks/category.service';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        TasksComponent, 
+        TasksComponent,
         GameComponent,
         // MinesweeperComponent
     ],
@@ -44,11 +46,13 @@ import { CategoryService } from './tasks/category.service';
         AuthenticationService,
         UserService,
         CategoryService,
+        SubCategoryService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true
         },
+        
 
         // provider used to create fake backend
         fakeBackendProvider
