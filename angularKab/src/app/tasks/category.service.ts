@@ -26,9 +26,10 @@ export class CategoryService {
     // CREATE CATEGORY 
     //---------------------
     create(category: Category) {
-        this.http.post('http://127.0.0.1:1337/createCategory/', category, httpOptions
+        this.http.post<any>('http://127.0.0.1:1337/createCategory/', category, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
+            category.cat_id = antw.body.cat_id;
         },
             err => console.log(err.message));
     }
@@ -37,12 +38,12 @@ export class CategoryService {
     // DELETE CATEGORY
     //---------------------
     delete(category: Category) {             
-        let id = category.cat_id;
+       // let id = category.cat_id;
         console.log('delete()  cat.service.ts');
         console.log('category.cat_id: ', category.cat_id);
         console.log('category: ', category);
         
-        this.http.delete('http://127.0.0.1:1337/deleteCategory/:'+id+'', httpOptions
+       this.http.delete('http://127.0.0.1:1337/deleteCategory/'+ category.cat_id, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
         },
