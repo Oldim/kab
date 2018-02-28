@@ -27,6 +27,7 @@ export class RegisterComponent {
                 },
                 error => {
                     this.alertService.error(error);
+                    
                     this.loading = false;
                 });
     }

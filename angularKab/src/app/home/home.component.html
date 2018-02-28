@@ -1,29 +1,40 @@
-﻿   <!-- SECOND PAGE / AFTER LOGIN  --> 
+﻿<!-- SECOND PAGE / AFTER LOGIN  -->
 
-   <!-- Greeting User --> 
+<!-- Greeting User -->
 <div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}!</h1>
+    <h1>Hi {{currentUser.firstName}}! {{currentUser.id}}</h1>
     <p>You're logged in KABproductions!!</p>
 
-    <!-- LINK TO TASK & LINK TO GAME --> 
+    <!-- LINK TO TASK & LINK TO GAME -->
     <h3>Navigation</h3>
-   <ul>
-       <li>
-           <a routerLink="/tasks">Tasks</a>
-       </li>
-       <li>
-           <a routerLink="/game">Minesweeper</a>
-       </li>
-   </ul>
+    <section>
+        <div>
+            <a routerLink="/tasks" class="btn">Tasks</a>
+        </div>
+        <div>
+            <a routerLink="/game" class="btn">Minesweeper</a>
+        </div>
+    </section>
 
-    <!-- ALL REGISTERED USERS --> 
-    <h3>All registered users:</h3>
-    <ul>
-        <li *ngFor="let user of users">
-            {{user.username}} ({{user.firstName}} {{user.lastName}})
-            - <a (click)="deleteUser(user.id)">Delete</a>
-        </li>
-    </ul>
-       <!-- LOGOUT --> 
-    <p><a [routerLink]="['/login']">Logout</a></p>
+
+
+
+
+    <!-- <div [(ngModel)]={ {currentUser.id}}>
+        <div *ngIf="{{currentUser.id}} = 1">
+            <h3>Terug naar de hoofdmenu:</h3>
+            <ul>
+                <li *ngFor="let user of users">
+                    {{user.username}} ({{user.firstName}} {{user.lastName}}) -
+                    <a (click)="deleteUser(user.id)">Delete</a>
+                </li>
+            </ul>
+        </div>
+    </div> -->
+
+
+    <!-- LOGOUT -->
+    <p>
+        <a [routerLink]="['/login']" class="btn">Logout</a>
+    </p>
 </div>

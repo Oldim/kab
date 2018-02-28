@@ -26,7 +26,7 @@ export class UserService {
     }
 
     getById(id: number) {
-        return this.http.get('http://127.0.0.1:1337/user' + id);
+        return this.http.get('http://127.0.0.1:1337/userId' + id);
     } 
 
     create(user: User) {
@@ -36,8 +36,8 @@ export class UserService {
     update(user: User) {
         return this.http.put('/api/users/' + user.id, user);
     }
-
+*/
     delete(id: number) {
         return this.http.delete('/api/users/' + id);
-    } */
+    } 
 }

@@ -147,16 +147,21 @@ app.post('/createUser', function (req, res) {
 //--------------------------------------------------------
 
 app.post('/createCategory', function (req, res) {
+    let body = {};
     console.log("Express server /createCategory... ");
     let connection = makeConnection();
     let requ = JSON.parse(Object.keys(req.body)[0]);
-    console.log(requ);
+    //console.log(requ);
 
     connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         console.log('app.post ( SQL TYPESCRIPT category...)');
-
+        body = {
+            cat_id: rows.insertId
+        };
         // mariaDB LASTINDEXOF om cat_id terug te krijgen voor Delete
-        res.send({ message: "res.end() POST category ok!\n check SQL database if data is added. " });
+        console.log(requ);
+        // res.send({ message: rows.insertId });
+        res.send({  body: body });
         connection.end();
     });
 });
@@ -166,13 +171,14 @@ app.post('/createCategory', function (req, res) {
 // DELETE CATEGORY
 //--------------------------------------------------------
 
-app.delete('/deleteCategory/:cat_id', function (req, res) {
+app.delete('/deleteCategory/:id', function (req, res) {
     console.log("Express server /deleteCategory ");
+    console.log(res)
     let connection = makeConnection();
-
-    connection.query('DELETE FROM category WHERE cat_id LIKE ' + req.params.cat_id + ''),
+    connection.query('DELETE FROM category WHERE cat_id LIKE \'' + req.params.id + '\''),
         function (err, rows, fields) {
             console.log('app.delete ( SQL TYPESCRIPT category...)');
+            console.log(res.insertId);
             res.send({ message: "res.send() delete ok --> Check database !" });
             connection.end();
         };

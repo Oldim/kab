@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CategoryService } from './category.service';
 import { User } from '../_models';
 import { UserService } from '../_services/index';
+<<<<<<< HEAD
+=======
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+>>>>>>> 0f5f5d3a05042e4810f091e14af5056767753922
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,9 +24,9 @@ export class TasksComponent implements OnInit {
   title: string;
   currentUser: User;
   cat: string;
+  cat_id: number;
   category: Category;
   categories: Category[] = [];
-
 
   constructor(private categoryService: CategoryService, private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -37,8 +41,10 @@ export class TasksComponent implements OnInit {
   createCategoryInDatabank(): void {
     let category: Category = new Category();
     // ADD DESCRIPTION TO OBJ
+   
     category.cat_description = this.cat;
     category.ID = this.currentUser.id;
+    
     // PUSH CATEGORY OBJ INTO ARRAY CATEGORIES
     this.categories.push(category);
     // SEND ALL TO CATEGORY.SERVICE.TS TO create()
@@ -49,28 +55,21 @@ export class TasksComponent implements OnInit {
   // DELETE BUTTON OF CATEGORY TAB
   //--------------------------------------------
   deletebtn(obj): void {
-    for (let i = 0; i < this.categories.length; i++) {
-      if (this.categories[i] == obj) {
-        let pos = this.categories.indexOf(this.categories[i]);
-        // SEND DELETE() TO CATEGORY.SERVICE.TS -> KAB.EXPRESS.TS
-        this.categoryService.delete(this.categories[i]);
-        this.categories.splice(pos, 1);
-      }
-    }
+    console.log(obj.cat_id);
+    this.categoryService.delete(obj);
+    this.categories.splice(this.categories.indexOf(obj),1);
 
-  }
-  //--------------------------------------------
-  // EDIT CATEGORY DESCRIPTION
-  //--------------------------------------------
-  editTitle(object) {
-    console.log("object in array auto aangepast: ", object);
-    console.log("Update object naar databank!");
-   // In object zou alles al moeten zitten zoals id, cat_id, description
-   
-      // UPDATE DATABASE TO CATEGORY.SERVICE.TS TO create()
-      this.categoryService.create(object);
-
-
+    // for (let i = 0; i < this.categories.length; i++) {
+    //   if (this.categories[i] == obj) {
+    //     let pos = this.categories.indexOf(this.categories[i]);
+    //     // SEND TO CATEGORY.SERVICE.TS TO delete()
+    //    // console.log(this.categories[i]);
+  
+    //     this.categoryService.delete(this.categories[i]);
+    //     this.categories.splice(pos, 1);
+    //   }
+    // }
+    
   }
 
 }
