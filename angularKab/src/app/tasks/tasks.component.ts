@@ -56,27 +56,16 @@ export class TasksComponent implements OnInit {
     this.categoryService.delete(obj);
     this.categories.splice(this.categories.indexOf(obj),1);
 
-    // for (let i = 0; i < this.categories.length; i++) {
-    //   if (this.categories[i] == obj) {
-    //     let pos = this.categories.indexOf(this.categories[i]);
-    //     // SEND TO CATEGORY.SERVICE.TS TO delete()
-    //    // console.log(this.categories[i]);
-  
-    //     this.categoryService.delete(this.categories[i]);
-    //     this.categories.splice(pos, 1);
-    //   }
-    // }
     
   }
-    //--------------------------------------------
-    // DELETE BUTTON OF CATEGORY TAB
-    //--------------------------------------------
-    editTitle(object){
-      console.log("Auto change all data to object: update databank");
-      
-       // UPDATE DATABANK
-      this.categoryService.create(object);
-    }
+  //--------------------------------------------
+  // SAVE BUTTON UPDATE CATEGORY IN DATABASE
+  //--------------------------------------------
+  editTitle(object){
+    console.log("Auto change all data to object: update databank");
+   // UPDATE DATABANK
+    this.categoryService.create(object);
+  }
 
 }
 
