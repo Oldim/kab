@@ -31,8 +31,8 @@
 .cattab {
     display: inline-block;
     background-color: #eee;
-    width: 120px;
-    height: 100px;
+    width: 180px;
+    height: 150px;
     border: solid 1px lightgrey;
     margin-left: 18px;
     margin-top: 10px;
@@ -46,3 +46,12 @@
 .deletebtn{
     float:  right;
 }
+
+input.cat_title {
+    width: 177px;
+}
+
+.editbtn{
+    float: right;
+}
+

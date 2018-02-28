@@ -4,14 +4,11 @@ import { CategoryService } from './category.service';
 import { User } from '../_models';
 import { UserService } from '../_services/index';
 
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
-
   })
 };
-
 
 @Component({
   selector: 'app-tasks',
@@ -38,7 +35,6 @@ export class TasksComponent implements OnInit {
   // ADDS CATEGORY TO DATABANK -> category.service.ts
   //--------------------------------------------
   createCategoryInDatabank(): void {
-    // CREATE NEW CATEGORY
     let category: Category = new Category();
     // ADD DESCRIPTION TO OBJ
     category.cat_description = this.cat;
@@ -56,17 +52,30 @@ export class TasksComponent implements OnInit {
     for (let i = 0; i < this.categories.length; i++) {
       if (this.categories[i] == obj) {
         let pos = this.categories.indexOf(this.categories[i]);
-        // SEND TO CATEGORY.SERVICE.TS TO delete()
-       // console.log(this.categories[i]);
-  
+        // SEND DELETE() TO CATEGORY.SERVICE.TS -> KAB.EXPRESS.TS
         this.categoryService.delete(this.categories[i]);
         this.categories.splice(pos, 1);
       }
     }
-    
+
+  }
+  //--------------------------------------------
+  // EDIT CATEGORY DESCRIPTION
+  //--------------------------------------------
+  editTitle(object) {
+    console.log("object in array auto aangepast: ", object);
+    console.log("Update object naar databank!");
+   // In object zou alles al moeten zitten zoals id, cat_id, description
+   
+      // UPDATE DATABASE TO CATEGORY.SERVICE.TS TO create()
+      this.categoryService.create(object);
+
+
   }
 
 }
+
+
 
 
 //********************************************************************************************/

@@ -16,13 +16,22 @@
 
 <!--     CATEGORY ASSEMBLY      -->
 <div id="categorylist">
+  <div *ngFor="let c of categories" class="cattab">
 
-  <div *ngFor="let c of categories"  class="cattab">
-    <span class="cat_title" (click)="editTitle()">{{c.cat_description}}</span>
+    <!-- VISIBLE WHEN CREATED -->
+    <span class="cat_title">{{c.cat_description}}</span>
     <button class="deletebtn" (click)="deletebtn(c)"> x </button>
+    <button class="editbtn" (click)="show = !show">edit </button>
+
+    <!-- VISIBLE WHEN IN EDIT MODUS -->
+    <div *ngIf="show">
+      <input type="text" class="cat_title" [(ngModel)]="c.cat_description" name="c.cat_description">
+      <button class="savebtn" (click)="show = !show; editTitle(c);"> save </button>
+      <button class="cancelbtn" (click)="show = !show"> cancel </button>
+    </div>
+
+
   </div>
 
-
-
-  <span *ngIf = "categories.length === 0" id="span">You have no categories to organise...</span>
+  <span *ngIf="categories.length === 0" id="span">You have no categories to organise...</span>
 </div>
