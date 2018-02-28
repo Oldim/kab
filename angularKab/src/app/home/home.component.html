@@ -8,10 +8,10 @@
     <!-- LINK TO TASK & LINK TO GAME -->
     <h3>Navigation</h3>
     <section>
-        <div>
-            <a routerLink="/tasks" class="btn">Tasks</a>
+        <div class="taskgame">
+            <a routerLink="/tasks" class="btn" (click)="getAllTasks()">Tasks</a>
         </div>
-        <div>
+        <div class="taskgame">
             <a routerLink="/game" class="btn">Minesweeper</a>
         </div>
     </section>
@@ -34,7 +34,9 @@
 
 
     <!-- LOGOUT -->
-    <p>
-        <a [routerLink]="['/login']" class="btn">Logout</a>
-    </p>
+    <div>
+        <br>
+        <a [routerLink]="['/login']" class="btnLog">Logout</a>
+
+    </div>
 </div>

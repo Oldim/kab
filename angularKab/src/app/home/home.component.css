@@ -10,9 +10,9 @@
 
 .btn {   
     padding: 10px 45px;
-    background: #ec4b3b;
+    background: rgb(53, 112, 223);
     color: #fff;
-    border: 1px #ec4b3b solid;
+    border: 1px rgb(53, 112, 223) solid;
     text-transform: uppercase;
     font-weight: 700;
     border-radius: 10px;
@@ -22,10 +22,39 @@
 
 .btn:hover {
     background: none;
-    color: #ec4b3b;
+    color:rgb(53, 112, 223);
     transition: 0.5s all;
     -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -ms-transition: 0.5s all;
     -moz-transition: 0.5s all;
 }
+
+.taskgame{
+    margin: 10px;
+}
+/* --------------------------
+        btn logout 
+ ------------------------------*/
+.btnLog {   
+    padding: 10px 45px;
+    background: rgb(53, 112, 223);
+    color: #fff;
+    border: 1px rgb(53, 112, 223) solid;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.btnLog:hover {
+    background: none;
+    color:rgb(53, 112, 223);
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+}
+

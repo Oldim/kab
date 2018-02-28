@@ -48,13 +48,26 @@ export class CategoryService {
     //---------------------
     // DELETE CATEGORY
     //---------------------
-    delete(category: Category) {             
-       // let id = category.cat_id;
+    delete(category: Category) {
+        // let id = category.cat_id;
         console.log('delete()  cat.service.ts');
         console.log('category.cat_id: ', category.cat_id);
         console.log('category: ', category);
+
+        this.http.delete('http://127.0.0.1:1337/deleteCategory/' + category.cat_id, httpOptions
+        ).subscribe(antw => {
+            console.dir(antw);
+        },
+            err => console.log(err.message));
+    }
+
+    //---------------------
+    // GET ALL CATEGORIES
+    //---------------------
+    getAllCat(user: User) {
+        console.log('getAllCat()  category.service.ts');
         
-       this.http.delete('http://127.0.0.1:1337/deleteCategory/'+ category.cat_id, httpOptions
+        this.http.get('http://127.0.0.1:1337/getAllCat/'+ user.id, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
         },

@@ -13,6 +13,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'tasks', component: TasksComponent },
     { path: 'game', component: GameComponent},
+    { path: 'home', component: HomeComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
