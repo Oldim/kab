@@ -34,6 +34,7 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllTasks();
   }
 
   //--------------------------------------------
@@ -41,22 +42,17 @@ export class TasksComponent implements OnInit {
   //--------------------------------------------
   createCategoryInDatabank(): void {
     let category: Category = new Category();
-    // ADD DESCRIPTION TO OBJ
-
     category.cat_description = this.cat;
     category.ID = this.currentUser.id;
-    
-    // PUSH CATEGORY OBJ INTO ARRAY CATEGORIES
     this.categories.push(category);
     // SEND ALL TO CATEGORY.SERVICE.TS TO create()
     this.categoryService.create(category); 
     this.cat='';
   }
 
-
-    //--------------------------------------------
+  //-------------------------------------------------------
   // ADDS Sub-CATEGORY TO DATABANK -> subCategory.service.ts
-  //--------------------------------------------
+  //--------------------------------------------------------
   createSubCat(obj): void {
     let subCategory: Subcat = new Subcat();
     
@@ -74,19 +70,35 @@ export class TasksComponent implements OnInit {
   deletebtn(obj): void {
     console.log(obj.cat_id);
     this.categoryService.delete(obj);
-    this.categories.splice(this.categories.indexOf(obj),1);
+    this.categories.splice(this.categories.indexOf(obj), 1);
   }
-
 
   //--------------------------------------------
   // SAVE BUTTON UPDATE CATEGORY IN DATABASE
   //--------------------------------------------
-  editTitle(object){
+  editTitle(object) {
     console.log("Auto change all data to object: update databank");
-   // UPDATE DATABANK
+    // UPDATE DATABANK
     this.categoryService.edit(object);
   }
 
+  //--------------------------------------------
+  // GET ALL CATEGORIES OUT DATABASE oninit()
+  //--------------------------------------------
+  getAllTasks() {
+    let user = this.currentUser;
+    this.categoryService.getAllCat(user).subscribe(antw => {
+      this.categories = [];
+      for (let i = 0; i < antw.length; i++) {
+        let category = new Category();
+        category.ID = antw[i].id;
+        category.cat_description = antw[i].description;
+        category.cat_id = antw[i].cat_id;
+        this.categories.push(category);
+      }
+    },
+      err => console.log(err.message));
+  }
 }
 
 

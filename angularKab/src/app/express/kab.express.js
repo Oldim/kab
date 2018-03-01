@@ -89,9 +89,6 @@ app.post('/authenticate', function (req, res) {
 
 
 
-
-
-
 //--------------------------------------------------------
 // REGISTER: CREATE NEW USER 
 //--------------------------------------------------------
@@ -123,7 +120,7 @@ app.get('/getAllCat/:id', function (req, res) {
         else {
             console.log('Error while performing query.');
         }
-        connection.send();
+        connection.end();
     });
 });
 
@@ -214,9 +211,11 @@ app.post('/editCategory', function (req, res) {
 // DELETE CATEGORY
 //--------------------------------------------------------
 
+// First delete subCategories before deletion of Category 
+
 app.delete('/deleteCategory/:id', function (req, res) {
     let connection = makeConnection();
-    connection.query('DELETE FROM category WHERE cat_id LIKE \'' + req.params.id + '\''),
+    connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
         function (err, rows, fields) {
             res.send({ message: "res.send() delete ok --> Check database !" });
             connection.end();
