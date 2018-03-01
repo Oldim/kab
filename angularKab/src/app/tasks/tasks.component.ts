@@ -24,6 +24,7 @@ export class TasksComponent implements OnInit {
   cat: string;
   subCat: string = '';
   cat_id: number;
+  subcat_id: number;
   category: Category;
   subCategory: Subcat;
   categories: Category[] = [];
