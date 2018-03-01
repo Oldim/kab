@@ -1,7 +1,9 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../_models/index';
 import { UserService } from '../_services/index';
 import { CategoryService } from '../tasks/category.service';
+import { Category } from '../tasks/tasks.component';
+
 
 
 @Component({
@@ -30,8 +32,4 @@ export class HomeComponent implements OnInit {
         this.userService.getAll().subscribe(users => { this.users = users; });
     }
 
-    getAllTasks(){
-        let user = this.currentUser;
-        this.categoryService.getAllCat(user); //.subscribe() ??
-    }
 }
