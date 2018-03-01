@@ -41,7 +41,7 @@ app.all('/*', function (req, res, next) {
 //----------------------------------------------------------
 
 app.get('/user', function (req, res) {
-    console.log('get /user request received');
+    console.log('express get /user request received');
 
     let connection = makeConnection();
 
@@ -149,7 +149,7 @@ app.get('/getAllCat/:id', function (req, res) {
         else {
             console.log('Error while performing query.');
         }
-        connection.send();
+        connection.end();
     });
 });
 
