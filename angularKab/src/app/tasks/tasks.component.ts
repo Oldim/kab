@@ -59,12 +59,13 @@ export class TasksComponent implements OnInit {
   //--------------------------------------------
   createSubCat(obj): void {
     let subCategory: Subcat = new Subcat();
-    this.subCat = '';
+    
     subCategory.subCat_description = this.subCat; 
     subCategory.cat_id = obj.cat_id;
     console.log(obj);
     this.subCategories.push(subCategory);
     this.subCategoryService.createSub(subCategory);
+    this.subCat = '';
   }
 
   //--------------------------------------------
