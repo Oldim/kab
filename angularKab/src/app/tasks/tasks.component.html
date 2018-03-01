@@ -22,6 +22,12 @@
     <span class="cat_title">{{c.cat_description}}</span>
     <button class="deletebtn" (click)="deletebtn(c)"> x </button>
     <button class="editbtn" (click)="show = !show">edit </button>
+    <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button>
+    <div *ngIf="showSub">
+        <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
+        <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
+    </div>
+
 
     <!-- VISIBLE WHEN IN EDIT MODUS -->
     <div *ngIf="show">
@@ -30,14 +36,26 @@
       <button class="cancelbtn" (click)="show = !show"> cancel </button>
     </div>
 
-
   </div>
 
   <span *ngIf="categories.length === 0" id="span">You have no categories to organise...</span>
 </div>
 
-<section>
-    <div>
-        <a routerLink="/home" class="btnBack">Back</a>
-    </div>
-</section>
+
+
+<div id="subCategorylist">
+    
+  <div *ngFor="let sc of subCategories" class="subCattab">
+
+    <!-- voor sub-cat te creeren -->
+    <!-- <div *ngIf="showSub">
+        <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
+      <input type="text" class="subcat_title" [(ngModel)]="sc.subCat_description" name="sc.subCat_description">
+      <button class="btnSave" (click)="showSub = !showSub; createSubCat();"> save </button>
+      <button class="btnCancel" (click)="showSub = !showSub"> cancel </button>
+    </div> -->
+
+
+  </div>
+
+</div>
