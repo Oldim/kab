@@ -160,6 +160,7 @@ app.post('/createSubCategory', function (req, res) {
     let body = {};
     let connection = makeConnection();
     let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log("tstess -----");
     console.log(requ);
     connection.query('INSERT INTO subcat (subCat_description, cat_id) VALUES ("' + requ.subCat_description + '","' + requ.cat_id + '")', function (err, rows, fields) {
         if (!err) {

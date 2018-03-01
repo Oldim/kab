@@ -58,7 +58,7 @@ export class SubCategoryService {
         ).subscribe(antw => {
             console.log("test------------");
             console.dir(antw);
-            subCategory.subcat_id = antw.csubcat_id;
+            subCategory.subcat_id = antw.subcat_id;
         },
             err => console.log(err.message));
     }

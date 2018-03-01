@@ -29,6 +29,8 @@ export class TasksComponent implements OnInit {
   categories: Category[] = [];
   subCategories: Subcat[] = [];
 
+  currentSubcat: Subcat;
+
   constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService, private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -62,6 +64,7 @@ export class TasksComponent implements OnInit {
     this.subCategories.push(subCategory);
     this.subCategoryService.createSub(subCategory);
     this.subCat = '';
+    this.currentSubcat = null;
   }
 
   //--------------------------------------------

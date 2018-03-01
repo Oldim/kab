@@ -22,8 +22,10 @@
     <span class="cat_title">{{c.cat_description}}</span>
     <button class="deletebtn" (click)="deletebtn(c)"> x </button>
     <button class="editbtn" (click)="show = !show">edit </button>
-    <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button>
-    <div *ngIf="showSub">
+    <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
+    <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
+    <!-- <div *ngIf="showSub"> -->
+        <div *ngIf="c == currentSubcat">
         <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
         <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
     </div>
