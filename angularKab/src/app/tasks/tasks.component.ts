@@ -42,22 +42,17 @@ export class TasksComponent implements OnInit {
   //--------------------------------------------
   createCategoryInDatabank(): void {
     let category: Category = new Category();
-    // ADD DESCRIPTION TO OBJ
-
     category.cat_description = this.cat;
     category.ID = this.currentUser.id;
-
-    // PUSH CATEGORY OBJ INTO ARRAY CATEGORIES
     this.categories.push(category);
     // SEND ALL TO CATEGORY.SERVICE.TS TO create()
     this.categoryService.create(category); 
     this.cat='';
   }
 
-
-    //--------------------------------------------
+  //-------------------------------------------------------
   // ADDS Sub-CATEGORY TO DATABANK -> subCategory.service.ts
-  //--------------------------------------------
+  //--------------------------------------------------------
   createSubCat(obj): void {
     let subCategory: Subcat = new Subcat();
     this.subCat = '';

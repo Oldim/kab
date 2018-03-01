@@ -89,9 +89,6 @@ app.post('/authenticate', function (req, res) {
 
 
 
-
-
-
 //--------------------------------------------------------
 // REGISTER: CREATE NEW USER 
 //--------------------------------------------------------
@@ -112,7 +109,6 @@ app.get('/getAllCat/:id', function (req, res) {
     console.log('express:get all categories');
     let requ = req.params.id;
     let connection = makeConnection();
-
     connection.query('SELECT * FROM category WHERE id = "' + requ + '"', function (err, rows, fields) {
         if (!err) {
             let result = JSON.stringify(rows);
