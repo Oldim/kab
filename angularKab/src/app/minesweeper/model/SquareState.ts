@@ -1,8 +1,13 @@
-export enum SquareState
+export enum SquareState 
 {
     Safe,
     Flag,
     Clear,
     Mine,
-    Detonated
-} 
+    Detonated,
+    Question
+}   
+
+
+
+ 

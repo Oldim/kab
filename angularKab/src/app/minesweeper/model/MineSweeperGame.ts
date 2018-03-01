@@ -1,41 +1,43 @@
-// import { Game } from "../Interfaces/Game";
-// import { Grid } from "../Interfaces/Grid";
-import { MinesweeperGrid } from "./MinesweeperGrid"; 
-// import { MinesweeperGameDifficulty } from "../Enums/MinesweeperGameDifficulty";
+import { MinesweeperGrid } from "./MinesweeperGrid";
 
-export class MinesweeperGame //implements Game 
-{
+
+export class MinesweeperGame {
     private _grid: MinesweeperGrid;
+    timer;
+    private _seconden: number = 55;
+    private _minuten: number = 0; 
+    private _result: string;
 
-    get grid(): MinesweeperGrid
-    {
+    get seconden() {
+        return this._seconden;
+    }
+
+    get minuten() {
+        return this.minuten;
+    }
+
+    get grid(): MinesweeperGrid {
         return this._grid;
     }
 
-   constructor()
-    {
-        this._grid = new MinesweeperGrid(20,20,10);
+    constructor() {
+        this._grid = new MinesweeperGrid(10, 10, 10);
+        this._seconden = 0;
     }
-    // constructor(difficulty: MinesweeperGameDifficulty)
-    // {
-        
-        // switch(difficulty)
-        // {
-        //     case MinesweeperGameDifficulty.Easy:
-        //     {
-        //         this.grid = new MinesweeperGrid(10, 10, 10);
-        //         break;
-        //     } 
-        //     case MinesweeperGameDifficulty.Medium:
-        //     {
-        //         this.grid = new MinesweeperGrid(20, 20, 40);
-        //         break;
-        //     } 
-        //     case MinesweeperGameDifficulty.Hard:
-        //     {
-        //         this.grid = new MinesweeperGrid(50, 50, 250);
-        //         break;
-        //     } 
-        // }
-    // }
-}
+
+    start(): void {
+        this._seconden = 0;
+        this.timer = setInterval(() => { ++this._seconden; }, 1000);
+    }
+
+    stop(): void {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    reset(): number {
+        this._grid = new MinesweeperGrid(10, 10, 10);
+        return this._seconden = 0;
+    }
+}  
+ 

@@ -13,7 +13,7 @@ export class MinesweeperGrid// implements Grid
         return this.squares;
     }
 
-    constructor(width: number, height: number, mines: number) {
+    constructor(width: number, height: number, mines: number) { 
         if (width < 2 || height < 2)
             throw new Error("Minimum grid size is 2 x 2.");
 
@@ -32,6 +32,7 @@ export class MinesweeperGrid// implements Grid
     }
 
     clearSquare(x: number, y: number): void {
+        console.log("clearSQUARE ",x," -",y)
         if (this.squares[x][y].clear() == SquareState.Detonated)
             throw Error("Game Over.");
 
@@ -39,32 +40,45 @@ export class MinesweeperGrid// implements Grid
 
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
-                if (this.squares[x + i][y + j].State == SquareState.Mine) {
-                    surroundingMines++;
-                    continue;
+                /**/
+                if (x + i >= 0 && x + i < this.height && y+j >= 0 && y+j < this.width) {
+                    /**/
+                    if (this.squares[x + i][y + j].State == SquareState.Mine) {
+                        surroundingMines++;
+                        continue;
+                    }
                 }
             }
         }
-
+ 
         if (surroundingMines == 0) {
             for (let i = -1; i <= 1; i++) {
                 for (let j = -1; j <= 1; j++) {
-                    this.clearSquare(x + i, y + j);
+                  /**/  if (x + i >= 0 && x + i < this.height && y+j >= 0 && y+j < this.width) {
+                      if (this.squares[x + i][y + j].State == SquareState.Safe)
+                        this.clearSquare(x + i, y + j);
+                    }
                 }
             }
         }
+        else{
+            console.log(surroundingMines)
+        }
     }
 
+
     private initialiseSquares(height: number) {
-        alert("InitializingSquares");
         this.squares = [];
 
         for (let i = 0; i < height; i++)
             this.squares[i] = [];
     }
+ 
 
+    // 
+    //  WORKS: Creating 
+    // 
     private createSquares(width: number, height: number, mines: number, minesCreated: number, recursive: boolean = false) {
-        alert("CreatingSquares");
         for (let i = 0; i < height; i++) {
             for (let j = 0; j < width; j++) {
                 if (this.squares[i][j] == null || this.squares[i][j].State != SquareState.Mine) {
@@ -85,4 +99,4 @@ export class MinesweeperGrid// implements Grid
         if (minesCreated < mines)
             this.createSquares(width, height, mines, minesCreated, true);
     }
-}
+} 
