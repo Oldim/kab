@@ -123,7 +123,7 @@ app.get('/getAllCat/:id', function (req, res) {
         else {
             console.log('Error while performing query.');
         }
-        connection.send();
+        connection.end();
     });
 });
 

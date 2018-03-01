@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { TasksComponent, Category } from './tasks.component';
 import { User } from '../_models';
+import { Observable } from 'rxjs/Observable';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -64,13 +65,8 @@ export class CategoryService {
     //---------------------
     // GET ALL CATEGORIES
     //---------------------
-    getAllCat(user: User) {
-        console.log('getAllCat()  category.service.ts');
-        
-        this.http.get('http://127.0.0.1:1337/getAllCat/'+ user.id, httpOptions
-        ).subscribe(antw => {
-            console.dir(antw);
-        },
-            err => console.log(err.message));
+    getAllCat(user: User): Observable<any[]> {
+        return this.http.get<any[]>('http://127.0.0.1:1337/getAllCat/'+ user.id, httpOptions
+        )//.subscribe -> task.components.ts
     }
 }
