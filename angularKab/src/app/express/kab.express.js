@@ -135,6 +135,38 @@ app.post('/createCategory', function (req, res) {
 
 
 //--------------------------------------------------------
+// POST + NEW Sub-CATEGORY
+//--------------------------------------------------------
+
+app.post('/createSubCategory', function (req, res) {
+    let body = {};
+    let connection = makeConnection();
+    let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log(requ);
+    connection.query('INSERT INTO subcat (subCat_description, cat_id) VALUES ("' + requ.subCat_description + '","' + requ.cat_id + '")', function (err, rows, fields) {
+        if (!err) {
+            console.log('app.post ( SQL TYPESCRIPT category...)');
+            console.log(rows.insertId);
+            
+            body = {
+                subcat_id: rows.insertId
+            };
+            //----------------------------------
+            // GET ANSWER BACK FOR ID 
+            //----------------------------------
+            //res.send({ message:"sub added" });
+             res.send({ body: body });
+        }
+        else {
+            console.log(err.message);
+            res.send({ body: err.message });
+        }
+        connection.end();
+    });
+});
+
+
+//--------------------------------------------------------
 // UPDATE CATEGORY
 //--------------------------------------------------------
 

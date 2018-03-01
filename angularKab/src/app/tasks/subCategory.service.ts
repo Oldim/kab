@@ -56,8 +56,9 @@ export class SubCategoryService {
     createSub(subCategory: Subcat) {
         this.http.post<any>('http://127.0.0.1:1337/createSubCategory/', subCategory, httpOptions
         ).subscribe(antw => {
+            console.log("test------------");
             console.dir(antw);
-            //category.cat_id = antw.body.cat_id;
+            subCategory.subcat_id = antw.csubcat_id;
         },
             err => console.log(err.message));
     }

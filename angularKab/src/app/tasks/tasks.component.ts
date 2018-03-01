@@ -22,6 +22,7 @@ export class TasksComponent implements OnInit {
   title: string;
   currentUser: User;
   cat: string;
+  subCat: string = '';
   cat_id: number;
   category: Category;
   subCategory: Subcat;
@@ -41,26 +42,28 @@ export class TasksComponent implements OnInit {
   createCategoryInDatabank(): void {
     let category: Category = new Category();
     // ADD DESCRIPTION TO OBJ
-   
+
     category.cat_description = this.cat;
     category.ID = this.currentUser.id;
     
     // PUSH CATEGORY OBJ INTO ARRAY CATEGORIES
     this.categories.push(category);
     // SEND ALL TO CATEGORY.SERVICE.TS TO create()
-    this.categoryService.create(category);
+    this.categoryService.create(category); 
+    this.cat='';
   }
 
 
     //--------------------------------------------
   // ADDS Sub-CATEGORY TO DATABANK -> subCategory.service.ts
   //--------------------------------------------
-  createSubCat(): void {
+  createSubCat(obj): void {
     let subCategory: Subcat = new Subcat();
-
-    subCategory.subCat_description = this.cat;    
+    this.subCat = '';
+    subCategory.subCat_description = this.subCat; 
+    subCategory.cat_id = obj.cat_id;
+    console.log(obj);
     this.subCategories.push(subCategory);
-
     this.subCategoryService.createSub(subCategory);
   }
 
@@ -101,7 +104,7 @@ export class Category {
 export class Subcat {
   subcat_id: number;
   subCat_description: string;
-  cat_id: string;
+  cat_id: number;
   constructor() { }
 }
 
