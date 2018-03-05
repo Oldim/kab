@@ -1,0 +1,38 @@
+<div id="board">
+
+    <div id="title">Minesweeper</div>
+
+    <div *ngFor="let rij of game.vakken, let i=index">
+
+        <div id="score"></div>
+
+        <button [ngClass]="'btn'" *ngFor="let kolom of game.vakken[0], let j = index" 
+        (click)="game.klik(i, j);targetClick();">
+       <label> {{ game.vakken[i][j].toestand }}</label>
+        </button>
+
+    </div><br />
+
+    <div id="time">
+
+        <button [ngClass]="'start_timer'" (click)="start();">Start Game</button>
+        <button [ngClass]="'stop_timer'" (click)="stop();">Stop Game</button>
+        <button [ngClass]="'reset_timer'" (click)="reset();">Reset Game</button>
+        <input type="text" [(ngModel)]="game.seconden" value="{{game.seconden}}" readonly>
+        <ul id="results"></ul>
+
+    </div>
+</div>
+
+
+
+
+
+        <label [ngSwitch]="toestand()">
+
+        <label *ngSwitchCase="0">{{ game.vakken[i][j].toestand }}</label>
+        <label *ngSwitchCase="1">{{ game.vakken[i][j].toestand }}</label>
+        <label *ngSwitchCase="2">{{ game.vakken[i][j].toestand }}</label>
+        <label *ngSwitchCase="3">{{ game.vakken[i][j].toestand }}</label>
+
+        </label>

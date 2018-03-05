@@ -65,7 +65,7 @@ export class Bord {
     private _seconden: number;
     private timer: any;//NodeJS.Timer;  // TODO: import van type Timer?  (zie https://github.com/Microsoft/TypeScript/issues/842)
 
-    constructor(rijen: number, kolommen: number, aantalBommen: number) {
+    constructor(rijen: number = 10, kolommen: number = 10, aantalBommen: number = 10) {
         this.vakken = [];
         this._eindeSpel = false;
         this._spelGewonnen = false;
