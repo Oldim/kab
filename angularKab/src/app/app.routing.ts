@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/index';
 import { AuthGuard } from './_guards/index';
 import { TasksComponent } from './tasks/tasks.component';
 import { GameComponent } from './game/game.component';
+import { MinesweeperComponent } from './minesweeper/model/minesweeper.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
     { path: 'tasks', component: TasksComponent },
     { path: 'game', component: GameComponent},
     { path: 'home', component: HomeComponent},
+    { path: 'minesweeper', component: MinesweeperComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

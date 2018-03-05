@@ -21,6 +21,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { GameComponent } from './game/game.component';
 import { CategoryService } from './tasks/category.service';
 import { SubCategoryService } from './tasks/subCategory.service';
+import { MinesweeperComponent } from './minesweeper/model/minesweeper.component';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { SubCategoryService } from './tasks/subCategory.service';
         RegisterComponent,
         TasksComponent,
         GameComponent,
-        // MinesweeperComponent
+        MinesweeperComponent
     ],
     providers: [
         AuthGuard,

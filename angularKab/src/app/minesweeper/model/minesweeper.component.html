@@ -1,0 +1,109 @@
+<body>
+    <section>
+        <div id="board">
+            <div>
+                <ul class="navbar">
+                    <li>
+                        <a [routerLink]="['/']" class="btnA" style="color: white; float: left; padding-left: -50px;">Home</a>
+                    </li>
+                    <br />
+                    <br />
+                    <li>
+                        <a [routerLink]="['/tasks']" class="btnA" style="color: white; float: left;">Tasks</a>
+                    </li>
+                    <br />
+                    <br />
+                    <li>
+                        <a [routerLink]="['/login']" class="btnA" style="color: white; float: left;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div id="title">Minesweeper</div> -->
+            <br />
+            <div id="'samenstellingBord'">
+                <div [ngClass]="slidecontainer">
+                    Aantal kolommen:
+                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="kolommen">
+                    <span [textContent]="kolommen"></span>
+                </div>
+                <div [ngClass]="slidecontainer">
+                    Aantal rijen:
+                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="rijen">
+                    <span [textContent]="rijen"></span>
+                </div>
+                <div [ngClass]="slidecontainer">
+                    Aantal bommen:
+                    <input type="range" min="3" max="100" class="slider" [(ngModel)]="bommen">
+                    <span [textContent]="bommen"></span>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div *ngIf="game">
+
+                <div *ngFor="let rij of game.vakken; let i=index">
+
+
+                    <button [ngClass]="'btn'" *ngFor="let kolom of game.vakken[0]; let j = index" (click)="game.klik(i, j);targetClick();" (contextmenu)="game.klikRechts(i, j);">
+
+
+                        <span [ngSwitch]="game.vakken[i][j].toestand">
+
+                            <label *ngSwitchCase="0">
+                                <span *ngIf="game.vakken[i][j].isBom">
+                                    <i class="fas fa-bomb"></i>
+                                </span>
+                                <span *ngIf="!game.vakken[i][j].isBom">{{ game.geefAantalBomBuren(i,j) }}</span>
+                            </label>
+
+                            <label *ngSwitchCase="1"></label>
+                            <label *ngSwitchCase="2">
+                                <i class="fas fa-check"></i>
+                            </label>
+                            <label *ngSwitchCase="3">
+                                <i class="fas fa-question-circle"></i>
+                            </label>
+                            <label *ngSwitchDefault></label>
+
+                        </span>
+                    </button>
+                </div>
+                <br />
+            </div>
+
+            <div id="time">
+                <button [ngClass]="'start_timer'" (click)="start();">Start Game</button>
+                <button [ngClass]="'reset_timer'" (click)="reset();">Reset Game</button>
+                <br />
+                <br />
+                <input *ngIf="game" [ngClass]="'timer'" type="text" [(ngModel)]="game.seconden" value="{{game.seconden}}" style="text-align: center;"
+                    readonly>
+                <ul id="results"></ul>
+            </div>
+
+            <table id="ranking">
+                <thead>
+                    <th>Username</th>
+                    <th>Lastname</th>
+                    <th>Firstname</th>
+                </thead>
+                <tbody>
+                    <td>PHLPSN_8</td>
+                    <td>Philipsen</td>
+                    <td>Wout</td>
+                </tbody>    
+            </table>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </section>
+</body>
