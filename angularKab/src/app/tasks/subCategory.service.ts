@@ -54,10 +54,11 @@ export class SubCategoryService {
     // CREATE Sub- CATEGORY 
     //---------------------
     createSub(subCategory: Subcat) {
+        console.log(subCategory);
         this.http.post<any>('http://127.0.0.1:1337/createSubCategory/', subCategory, httpOptions
         ).subscribe(antw => {
             console.log("test------------");
-            console.dir(antw);
+           // console.dir(antw);
             subCategory.subcat_id = antw.subcat_id;
         },
             err => console.log(err.message));

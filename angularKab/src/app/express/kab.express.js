@@ -19,7 +19,8 @@ let makeConnection = function () {
         user: 'root',  //		user     : 'oldimb1q_kab',
         password: 'root', //    password : 'JSkab123',
         database: 'kab', //     database : 'oldimb1q_kab'
-        port: 3306
+        port: 3306,
+        multipleStatements: true
     });
     connection.connect();
     return connection;
@@ -162,7 +163,12 @@ app.post('/createSubCategory', function (req, res) {
     let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log("tstess -----");
     console.log(requ);
-    connection.query('INSERT INTO subcat (subCat_description, cat_id) VALUES ("' + requ.subCat_description + '","' + requ.cat_id + '")', function (err, rows, fields) {
+    //var catRec= {description: 'requ.cat_description', ID: 'requ.ID'};
+    //var subCatRec ={subcat_id: requ.cat_id, cat_id: requ.cat_id};
+    var subCatRec =[ requ.category.cat_description, requ.category.ID,  requ.category.cat_id];
+    var sql = "INSERT INTO category (description, ID) VALUES (?,?);";
+    sql += "INSERT INTO subcat (subcat_id, cat_id) VALUES (last_insert_id(),?)";
+    connection.query(sql,subCatRec, function (err, rows, fields) {
         if (!err) {
             console.log('app.post ( SQL TYPESCRIPT category...)');
             console.log(rows.insertId);
