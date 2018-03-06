@@ -205,6 +205,8 @@ app.post('/editCategory', function (req, res) {
     console.log("Express server /editCategory... ");
     let connection = makeConnection();
     let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log('req.body', req.body);
+    console.log('requ', requ);
     connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = ' + requ.cat_id , function (err, rows, fields) {
         if (!err) {
             //----------------------------------
