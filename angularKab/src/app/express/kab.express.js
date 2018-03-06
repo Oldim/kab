@@ -131,9 +131,13 @@ app.get('/getAllCat/:id', function (req, res) {
 //--------------------------------------------------------
 
 app.post('/createCategory', function (req, res) {
+   
+    
     let body = {};
     let connection = makeConnection();
+    console.log("reqybody",req.body);
     let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log("reqy",requ);
     connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         if (!err) {
             console.log('app.post ( SQL TYPESCRIPT category...)');
