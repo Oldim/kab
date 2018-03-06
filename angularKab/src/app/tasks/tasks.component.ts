@@ -60,6 +60,7 @@ export class TasksComponent implements OnInit {
   createSubCat(obj): void {
     let tmp = obj.cat_description;
     let subCategory: Subcat = new Subcat();
+    let newCat = new Category();
     
    // subCategory.subCat_description = this.subCat;
    //subCategory.subcat_id= obj.subcat_id; 
@@ -68,12 +69,14 @@ export class TasksComponent implements OnInit {
     subCategory.category = obj;
     /**/subCategory.category.cat_description= this.subCat;
     //this.category.ID=  this.currentUser.id;
-    console.log("tasks-----------");    
-    console.log(obj);
-    console.log(subCategory);
+    // console.log("tasks-----------");    
+    // console.log(obj);
+    //console.log(subCategory);
     
-
     this.subCategories.push(subCategory);
+    newCat.cat_description = this.subCat;
+    newCat.ID = this.currentUser.id;
+    obj.subcategories.push(newCat);
 
     this.subCategoryService.createSub(subCategory);
    
@@ -165,7 +168,7 @@ export class Category {
 export class Subcat {
   subcat_id: number;
  // subCat_description: string;
-  //cat_id: number;
+  cat_id: number;
   category: Category;
   constructor() { }
 }
