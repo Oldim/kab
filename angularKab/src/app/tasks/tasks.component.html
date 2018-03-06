@@ -27,7 +27,7 @@
       <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
       <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
 
-      <span class="subCat_title">{{ c.cat_description}}</span>
+      <!-- <span class="subCat_title">{{ c.cat_description}}</span> -->
       <div *ngFor="let sub of c.subcategories" class="cattab">{{sub.cat_description}} </div>
 
     </div>

@@ -45,6 +45,7 @@ export class TasksComponent implements OnInit {
   //--------------------------------------------
   createCategoryInDatabank(): void {
     let category: Category = new Category();
+    this.headCategories.push(category);
     category.cat_description = this.cat;
     category.ID = this.currentUser.id;
     this.categories.push(category);
@@ -88,15 +89,16 @@ export class TasksComponent implements OnInit {
     console.log(obj.cat_id);
     this.categoryService.delete(obj);
     this.categories.splice(this.categories.indexOf(obj), 1);
+    this.headCategories.splice(this.headCategories.indexOf(obj), 1);
   }
 
   //--------------------------------------------
   // SAVE BUTTON UPDATE CATEGORY IN DATABASE
   //--------------------------------------------
-  editTitle(object) {
+  editTitle(obj) {
     console.log("Auto change all data to object: update databank");
     // UPDATE DATABANK
-    this.categoryService.edit(object);
+    this.categoryService.edit(obj);
   }
 
   //--------------------------------------------

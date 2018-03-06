@@ -170,7 +170,7 @@ app.post('/createSubCategory', function (req, res) {
     console.log(requ);
     //var catRec= {description: 'requ.cat_description', ID: 'requ.ID'};
     //var subCatRec ={subcat_id: requ.cat_id, cat_id: requ.cat_id};
-    var subCatRec =[ requ.category.cat_description, requ.category.ID,  requ.category.cat_id];
+    var subCatRec =[ requ.cat_description, requ.ID,  requ.subcat_id];
     var sql = "INSERT INTO category (description, ID) VALUES (?,?);";
     sql += "INSERT INTO subcat (subcat_id, cat_id) VALUES (last_insert_id(),?)";
     connection.query(sql,subCatRec, function (err, rows, fields) {

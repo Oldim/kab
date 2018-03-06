@@ -27,7 +27,8 @@ export class CategoryService {
     // CREATE CATEGORY 
     //---------------------
     create(category: Category) {
-        this.http.post<any>('http://127.0.0.1:1337/createCategory/', category, httpOptions
+        console.dir(category);
+        this.http.post<any>('http://127.0.0.1:1337/createCategory/', {cat_description: category.cat_description, ID: category.ID}, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
             category.cat_id = antw.body.cat_id;
@@ -38,7 +39,7 @@ export class CategoryService {
     // UPDATE CATEGORY
     //---------------------
     edit(category: Category) {
-        this.http.post<any>('http://127.0.0.1:1337/editCategory/', category, httpOptions
+        this.http.post<any>('http://127.0.0.1:1337/editCategory/', {cat_id: category.cat_id,cat_description: category.cat_description, ID: category.ID}, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
 
