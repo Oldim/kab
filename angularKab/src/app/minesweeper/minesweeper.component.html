@@ -1,7 +1,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <h1>Sweep mines like a boss</h1>
-Aantal rijen: <input type="number" class="rows" name="rows" [(ngModel)]="" #username="ngModel" required />
-Aantal kolommen: <input type="number" class="rows" name="rows" [(ngModel)]="" #username="ngModel" required />
-    <div id="board"></div>
-    <input type="button" (click)="alert();">
+Aantal rijen:
+<input type="number" class="rows" name="rows" [(ngModel)]="" #username="ngModel" required /> Aantal kolommen:
+<input type="number" class="rows" name="rows" [(ngModel)]="" #username="ngModel" required />
+<div id="board"></div>
+<input type="button" (click)="alert();">
+
+
+
+
+
+<!-- Back button routerlink to home -->
+<div class="back">
+    <a routerLink="/home" class="btn">back</a>
+</div>

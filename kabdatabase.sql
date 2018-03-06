@@ -53,7 +53,7 @@ WHERE cat_id = 7;
 
 -- --------------------------------- SUB CATEGORY  ------------------------------------------
 CREATE TABLE subcat (
-    subcat_id int AUTO_INCREMENT,
+    subcat_id int,
     subCat_description varchar(50) NOT NULL,
     cat_id int,
     PRIMARY KEY (subcat_id),
@@ -67,8 +67,8 @@ DROP TABLE subcat;
 INSERT INTO category (description, id) VALUES ('Gamen', '2'); -- chloe = 2
 INSERT INTO category (description, id) VALUES ('Training', '1');  -- wout = 1
 
-INSERT INTO subcat (subcat_id, subCat_description, cat_id) VALUES ('2', '2'); -- 2 = hobby + chloe = 2
-INSERT INTO subcat (subcat_id,subCat_description, cat_id) VALUES ('1', '1'); -- 1 = sport + wout = 1
+INSERT INTO subcat (subcat_id, cat_id) VALUES ('2', '2'); -- 2 = hobby + chloe = 2
+INSERT INTO subcat (subcat_id, cat_id) VALUES ('1', '1'); -- 1 = sport + wout = 1
 
 SELECT * FROM subcat;
 
@@ -97,7 +97,6 @@ INSERT INTO task (title,details, cat_id) VALUES ('Lopen', '30min', '1');-- 1 = s
 
 
 SELECT * FROM task;
-
 
 
 

@@ -16,7 +16,8 @@
 
 <!--     CATEGORY ASSEMBLY      -->
 <div id="categorylist">
-  <div *ngFor="let c of categories" class="cattab">
+  <!-- <div *ngFor="let c of categories" class="cattab"> -->
+      <div *ngFor="let c of headCategories" class="cattab">
 
     <!-- VISIBLE WHEN CREATED -->
     <span class="cat_title">{{c.cat_description}}</span>
@@ -25,6 +26,10 @@
       <button class="editbtn" (click)="show = !show">edit </button>
       <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
       <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
+
+      <span class="subCat_title">{{ c.cat_description}}</span>
+      <div *ngFor="let sub of c.subcategories" class="cattab">{{sub.cat_description}} </div>
+
     </div>
 
     <!-- <div *ngIf="showSub"> -->
@@ -34,8 +39,7 @@
 
 
     </div>
-    <span class="subCat_title">{{subCat}}</span>
-
+    
 
     <!-- VISIBLE WHEN IN EDIT MODUS -->
     <div *ngIf="show">
@@ -66,4 +70,8 @@
 
   </div>
 
+</div>
+
+<div class="back">
+    <a routerLink="/home" class="btn">back</a>
 </div>

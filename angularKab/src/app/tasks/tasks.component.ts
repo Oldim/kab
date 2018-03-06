@@ -27,8 +27,10 @@ export class TasksComponent implements OnInit {
   subcat_id: number;
   category: Category;
   subCategory: Subcat;
-  categories: Category[] = [];
-  subCategories: Subcat[] = [];
+  categories: Category[] = [];   
+  subCategories: Subcat[] = [];  // nakijken: overbodig ???
+  headCategories: Category[] = [];
+
 
   currentSubcat: Subcat;
 
@@ -112,9 +114,39 @@ export class TasksComponent implements OnInit {
         category.cat_description = antw[i].description;
         category.cat_id = antw[i].cat_id;
         this.categories.push(category);
+        if (antw[i].scat_id == undefined){
+          this.headCategories.push(category);
+        }
       }
+      this.vulSubcategories(antw);
+      console.log("headCategories met subcategories in");
+      console.dir(this.headCategories);
+
     },
       err => console.log(err.message));
+  }
+
+
+  vulSubcategories(rows: any){
+    console.log("rows");
+    console.dir(rows);
+
+    console.log("headcategories");
+    console.dir(this.headCategories);
+
+    for (let index = 0; index < this.headCategories.length; index++) {
+        let tmpSubcat = rows.filter( row => row.scat_id == this.headCategories[index].cat_id );
+        console.log("tmpsubcat");
+        
+        console.dir(tmpSubcat);
+        for (let i = 0; i < tmpSubcat.length; i++) {
+          let category = new Category();
+          category.ID = rows[i].id;
+          category.cat_description = rows[i].description;
+          category.cat_id = rows[i].cat_id;
+          this.headCategories[index].subcategories.push(category);
+        }
+    }
   }
 }
 
@@ -129,6 +161,9 @@ export class Category {
   cat_description: string;
   ID: number;
   constructor() { }
+
+  /**/
+  subcategories: Category[] = [];
 }
 
 export class Subcat {
