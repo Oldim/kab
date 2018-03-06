@@ -17,7 +17,7 @@ let makeConnection = function () {
     var connection = mysql.createConnection({
         host: 'localhost', //	host     : '81.241.232.193',
         user: 'root',  //		user     : 'oldimb1q_kab',
-        password: 'root', //    password : 'JSkab123',
+        password: 'Gemakkelijk/12580', //    password : 'JSkab123',
         database: 'kab', //     database : 'oldimb1q_kab'
         port: 3306,
         multipleStatements: true
