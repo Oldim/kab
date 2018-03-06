@@ -111,7 +111,8 @@ app.get('/getAllCat/:id', function (req, res) {
     let requ = req.params.id;
     let connection = makeConnection();
 
-    connection.query('SELECT * FROM category WHERE id = "' + requ + '"', function (err, rows, fields) {
+    //connection.query('SELECT * FROM category WHERE id = "' + requ + '"', function (err, rows, fields) {
+        connection.query('SELECT C.*, S.cat_id AS scat_id FROM category C LEFT JOIN subcat S ON C.cat_id = S.subcat_id WHERE id = "' + requ + '"', function (err, rows, fields) {
         if (!err) {
             let result = JSON.stringify(rows);
             console.log(result);
