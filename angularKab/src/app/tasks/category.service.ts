@@ -42,7 +42,6 @@ export class CategoryService {
         this.http.post<any>('http://127.0.0.1:1337/editCategory/', {cat_id: category.cat_id,cat_description: category.cat_description, ID: category.ID}, httpOptions
         ).subscribe(antw => {
             console.dir(antw);
-
         },
             err => console.log(err.message));
     }
