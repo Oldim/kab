@@ -30,8 +30,6 @@ export class TasksComponent implements OnInit {
   categories: Category[] = [];   
   subCategories: Subcat[] = [];  // nakijken: overbodig ???
   headCategories: Category[] = [];
-
-
   currentSubcat: Subcat;
 
   constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService, private userService: UserService) {
@@ -126,19 +124,15 @@ export class TasksComponent implements OnInit {
       err => console.log(err.message));
   }
 
-
+  //--------------------------------------------
+  // VUL CATEGORY WITH 
+  //--------------------------------------------
   vulSubcategories(rows: any){
-    console.log("rows");
-    console.dir(rows);
-
-    console.log("headcategories");
-    console.dir(this.headCategories);
-
+    //console.dir(this.headCategories);
     for (let index = 0; index < this.headCategories.length; index++) {
         let tmpSubcat = rows.filter( row => row.scat_id == this.headCategories[index].cat_id );
-        console.log("tmpsubcat");
-        
-        console.dir(tmpSubcat);
+      //  console.log("tmpsubcat");
+      //  console.dir(tmpSubcat);
         for (let i = 0; i < tmpSubcat.length; i++) {
           let category = new Category();
           category.ID = rows[i].id;
@@ -163,7 +157,7 @@ export class Category {
   constructor() { }
 
   /**/
-  subcategories: Category[] = [];
+  subcategories: Category[] = []; // Cat heeft array met Subcats 
 }
 
 export class Subcat {

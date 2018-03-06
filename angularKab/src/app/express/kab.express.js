@@ -104,7 +104,7 @@ app.post('/createUser', function (req, res) {
 });
 
 //----------------------------------------------------------
-// GET CATEGORIES OUT OF DATABASE
+// GET CATEGORIES OUT OF DATABASE & SUBCATs
 //----------------------------------------------------------
 app.get('/getAllCat/:id', function (req, res) {
     console.log('express:get all categories');

@@ -54,7 +54,6 @@ WHERE cat_id = 7;
 -- --------------------------------- SUB CATEGORY  ------------------------------------------
 CREATE TABLE subcat (
     subcat_id int,
-    subCat_description varchar(50) NOT NULL,
     cat_id int,
     PRIMARY KEY (subcat_id),
     FOREIGN KEY (cat_id) REFERENCES category (cat_id),
