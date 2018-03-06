@@ -150,7 +150,6 @@ export class Bord {
             this._spelGewonnen = true;
             /**/ clearInterval(this.timer);
             /**/ this.timer = null;
-            alert("Spel Gewonnen");
         }
     }
 
@@ -164,7 +163,6 @@ export class Bord {
                 if (this.vakken[i][j].isBom) this.vakken[i][j].toon();
             }
         }
-        alert("Spel verloren");
     }
 
     verwerkKlik(rij, kolom): void {

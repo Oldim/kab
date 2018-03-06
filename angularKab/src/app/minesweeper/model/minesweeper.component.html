@@ -4,17 +4,17 @@
             <div>
                 <ul class="navbar">
                     <li>
-                        <a [routerLink]="['/']" class="btnA" style="color: white; float: left; padding-left: -50px;">Home</a>
+                        <a [routerLink]="['/']" class="btnA" style="float: left; padding-left: -50px;">Home</a>
                     </li>
                     <br />
                     <br />
                     <li>
-                        <a [routerLink]="['/tasks']" class="btnA" style="color: white; float: left;">Tasks</a>
+                        <a [routerLink]="['/tasks']" class="btnA" style="float: left;">Tasks</a>
                     </li>
                     <br />
                     <br />
                     <li>
-                        <a [routerLink]="['/login']" class="btnA" style="color: white; float: left;">Logout</a>
+                        <a [routerLink]="['/login']" class="btnA" style="float: left;">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -49,21 +49,21 @@
 
                         <span [ngSwitch]="game.vakken[i][j].toestand">
 
-                            <label *ngSwitchCase="0">
+                            <span *ngSwitchCase="0">
                                 <span *ngIf="game.vakken[i][j].isBom">
                                     <i class="fas fa-bomb"></i>
                                 </span>
                                 <span *ngIf="!game.vakken[i][j].isBom">{{ game.geefAantalBomBuren(i,j) }}</span>
-                            </label>
+                            </span>
 
-                            <label *ngSwitchCase="1"></label>
-                            <label *ngSwitchCase="2">
+                            <span *ngSwitchCase="1"></span>
+                            <span *ngSwitchCase="2">
                                 <i class="fas fa-check"></i>
-                            </label>
-                            <label *ngSwitchCase="3">
+                            </span>
+                            <span *ngSwitchCase="3">
                                 <i class="fas fa-question-circle"></i>
-                            </label>
-                            <label *ngSwitchDefault></label>
+                            </span>
+                            <span *ngSwitchDefault></span>
 
                         </span>
                     </button>
@@ -76,24 +76,52 @@
                 <button [ngClass]="'reset_timer'" (click)="reset();">Reset Game</button>
                 <br />
                 <br />
-                <input *ngIf="game" [ngClass]="'timer'" type="text" [(ngModel)]="game.seconden" value="{{game.seconden}}" style="text-align: center;"
+                <input *ngIf="game" [ngClass]="'timer'" type="text" #tijdje [(ngModel)]="game.seconden" value="{{game.seconden}}" style="text-align: center;"
                     readonly>
                 <ul id="results"></ul>
             </div>
-
-            <table id="ranking">
+            <h1 id="h1">Current User Identification</h1>
+            <hr />
+            <table id="UserData">
                 <thead>
-                    <th>Username</th>
-                    <th>Lastname</th>
-                    <th>Firstname</th>
+                    <th><strong>Username</strong></th>
+                    <th><strong>Firstname</strong></th>
+                    <th><strong>Lastname</strong></th>
+                    <th><strong>Time</strong></th>
                 </thead>
                 <tbody>
-                    <td>PHLPSN_8</td>
-                    <td>Philipsen</td>
-                    <td>Wout</td>
+                    <td>{{ dataUsername }}</td>
+                    <td>{{ dataLastname }}</td>
+                    <td>{{ dataFirstname }}</td>
+                    <td *ngIf="game">{{ game.seconden }}</td>
                 </tbody>    
             </table>
-
+            <br />
+            <button [ngClass]="'send_stats'" (click)="sendStats();">Send Stats</button>
+            <h1 id="h1">Ranking Top 3</h1>
+            <hr />
+            <table id="Top3">
+                <thead>
+                        <th></th>
+                        <th><strong>Username</strong></th>
+                        <th><strong>Tijd</strong></th>
+                </thead>
+                <tbody>
+                        <th><strong>1</strong></th>
+                        <td></td>
+                        <td></td>
+                    </tbody>
+                    <tbody>
+                        <th><strong>2</strong></th>
+                        <td></td>
+                        <td></td>
+                    </tbody>
+                    <tbody>
+                        <th><strong>3</strong></th>
+                        <td></td>
+                        <td></td>
+                    </tbody>
+            </table>
         </div>
         <br>
         <br>
