@@ -50,9 +50,7 @@ export class CategoryService {
     // DELETE CATEGORY
     //---------------------
     delete(category: Category) {
-        // let id = category.cat_id;
-        console.log('delete()  cat.service.ts');
-        console.log('category.cat_id: ', category.cat_id);
+        console.log('delete() in category.service.ts');;
         console.log('category: ', category);
 
         this.http.delete('http://127.0.0.1:1337/deleteCategory/' + category.cat_id, httpOptions

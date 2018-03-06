@@ -229,13 +229,21 @@ app.post('/editCategory', function (req, res) {
 
 app.delete('/deleteCategory/:id', function (req, res) {
     let connection = makeConnection();
-    connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
+    var delGeg = [req.params.id, req.params.id, req.params.id];
+
+   var sql = "DELETE FROM category WHERE cat_id IN (SELECT subcat_id FROM subcat WHERE cat_id = ?);";
+    sql += "DELETE FROM subcat WHERE cat_id = ?;" ; //37
+    sql += "DELETE FROM category WHERE cat_id = ?" ; //37
+    connection.query(sql,delGeg,
+ //connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
         function (err, rows, fields) {
             res.send({ message: "res.send() delete ok --> Check database !" });
             connection.end();
-        };
+        });
 });
 
+//var sql = "INSERT INTO category (description, ID) VALUES (?,?);";
+//sql += "INSERT INTO subcat (subcat_id, cat_id) VALUES (last_insert_id(),?)";
 
 //----------------------------------------------------------
 // SERVER LISTEN 

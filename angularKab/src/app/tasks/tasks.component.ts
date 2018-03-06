@@ -89,10 +89,11 @@ export class TasksComponent implements OnInit {
   // DELETE BUTTON OF CATEGORY TAB
   //--------------------------------------------
   deletebtn(obj): void {
-    console.log(obj.cat_id);
+    console.log("delete btn obj:",obj);
     this.categoryService.delete(obj);
     this.categories.splice(this.categories.indexOf(obj), 1);
     this.headCategories.splice(this.headCategories.indexOf(obj), 1);
+    this.subCategories.splice(this.subCategories.indexOf(obj), 1);
   }
 
   //--------------------------------------------
