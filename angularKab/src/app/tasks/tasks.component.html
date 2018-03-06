@@ -20,13 +20,21 @@
 
     <!-- VISIBLE WHEN CREATED -->
     <span class="cat_title">{{c.cat_description}}</span>
-    <button class="deletebtn" (click)="deletebtn(c)"> x </button>
-    <button class="editbtn" (click)="show = !show">edit </button>
-    <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button>
-    <div *ngIf="showSub">
-        <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
-        <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
+    <div class="btnExtra" id="btnExtra">
+      <button class="deletebtn" (click)="deletebtn(c)"> x </button>
+      <button class="editbtn" (click)="show = !show">edit </button>
+      <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
+      <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
     </div>
+
+    <!-- <div *ngIf="showSub"> -->
+    <div *ngIf="c == currentSubcat">
+      <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
+      <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
+
+
+    </div>
+    <span class="subCat_title">{{subCat}}</span>
 
 
     <!-- VISIBLE WHEN IN EDIT MODUS -->
@@ -44,7 +52,7 @@
 
 
 <div id="subCategorylist">
-    
+
   <div *ngFor="let sc of subCategories" class="subCattab">
 
     <!-- voor sub-cat te creeren -->
