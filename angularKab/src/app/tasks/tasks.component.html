@@ -17,34 +17,43 @@
 <!--     CATEGORY ASSEMBLY      -->
 <div id="categorylist">
   <!-- <div *ngFor="let c of categories" class="cattab"> -->
-      <div *ngFor="let c of headCategories" class="cattab">
+  <div *ngFor="let c of headCategories" class="cattab">
 
     <!-- VISIBLE WHEN CREATED -->
     <span class="cat_title">{{c.cat_description}}</span>
     <div class="btnExtra" id="btnExtra">
       <button class="deletebtn" (click)="deletebtn(c)"> x </button>
       <button class="editbtn" (click)="show = !show">edit </button>
-      <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
-      <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
 
-      <!-- <span class="subCat_title">{{ c.cat_description}}</span> -->
-      <div *ngFor="let sub of c.subcategories" class="cattab">{{sub.cat_description}} </div>
+      <!-- ADD SUB & TASK -->
+      <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
+      <button class="btnAddTask" (click)="currentTask = t; ">Add Task </button>
+
+
 
     </div>
 
     <!-- <div *ngIf="showSub"> -->
     <div *ngIf="c == currentSubcat">
       <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
-      <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
-
-
+      <button class="btnCreate" (click)=" createSubCat(c);"> save SubCat </button>
+      <!-- <button class="cancelbtn" (click)="show = !show"> cancel </button> -->
     </div>
-    
+
+    <!-- <div *ngIf="showTaak"> -->
+    <div *ngIf="t == currentTask">
+      <input type="text" id="task" [(ngModel)]="task" name="task">
+      <textarea [(ngModel)]="taskText">{{taskText}}</textarea>
+      <input type="date" id="dates" [(ngModel)]="dateStart" name="dateStart">
+      <input type="date" id="dates" [(ngModel)]="dateEnd" name="dateEnd">
+      <button class="btnCreate" (click)="createTask(c);"> save Task </button>
+     <!-- <button class="cancelbtn" (click)="show = !show"> cancel </button> -->
+    </div>
 
     <!-- VISIBLE WHEN IN EDIT MODUS -->
     <div *ngIf="show">
       <input type="text" class="cat_title" [(ngModel)]="c.cat_description" name="c.cat_description">
-      <button class="savebtn" (click)="show = !show; editTitle(c);"> save </button>
+      <button class="savebtn" (click)="show = !show; editTitle(c);"> save Cat </button>
       <button class="cancelbtn" (click)="show = !show"> cancel </button>
     </div>
 
@@ -72,6 +81,20 @@
 
 </div>
 
+<!-- DIT KLOPT NIET: maar heb de functies en btns nodig om op te werken --> 
+<div id="Alltasks">
+
+  <div *ngFor="let taak of allTasks" class="tasks">
+    <button class="deleteTaak" (click)="deleteTaak(taak)"> x </button>
+    <input type="text" id="task" [(ngModel)]="task" name="task">
+      <textarea [(ngModel)]="taskText">{{taak.taskText}}</textarea>
+      <input type="date" id="dates" [(ngModel)]="dateStart" name="dateStart">
+      <input type="date" id="dates" [(ngModel)]="dateEnd" name="dateEnd">
+      <button class="editbtn" (click)="show = !show; editTaak()">edit taak </button>
+  </div>
+
+</div>
+
 <div class="back">
-    <a routerLink="/home" class="btn">back</a>
+  <a routerLink="/home" class="btn">back</a>
 </div>

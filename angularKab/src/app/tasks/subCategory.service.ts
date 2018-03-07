@@ -8,6 +8,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { TasksComponent, Category, Subcat  } from './tasks.component';
 import { User } from '../_models';
 import {CategoryService } from './category.service';
+import { TaskService } from './task.service';
+
 
 const httpOptions = {
     headers: new HttpHeaders({

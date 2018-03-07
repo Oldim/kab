@@ -21,6 +21,8 @@ import { TasksComponent } from './tasks/tasks.component';
 import { GameComponent } from './game/game.component';
 import { CategoryService } from './tasks/category.service';
 import { SubCategoryService } from './tasks/subCategory.service';
+import { TaskService } from './tasks/task.service';
+
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { SubCategoryService } from './tasks/subCategory.service';
         AuthenticationService,
         UserService,
         CategoryService,
-        SubCategoryService,
+        SubCategoryService,,
+        TaskService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,

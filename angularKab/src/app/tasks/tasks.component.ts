@@ -5,6 +5,9 @@ import { SubCategoryService } from './subCategory.service';
 import { User } from '../_models';
 import { UserService } from '../_services/index';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { TaskService } from './task.service';
+import { DatePipe } from '@angular/common';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +22,8 @@ const httpOptions = {
 })
 
 export class TasksComponent implements OnInit {
+  task: string;
+  taskText: string;
   title: string;
   currentUser: User;
   cat: string;
@@ -30,16 +35,21 @@ export class TasksComponent implements OnInit {
   categories: Category[] = [];   
   subCategories: Subcat[] = [];  // nakijken: overbodig ???
   headCategories: Category[] = [];
+  allTasks: Task[] = [];
+  allCatTasks: Task[] = [];
+  allSubCatTasks: Task[] = [];
   currentSubcat: Subcat;
 
-  constructor(private categoryService: CategoryService, private subCategoryService: SubCategoryService, private userService: UserService) {
+  constructor(private taskService: TaskService ,private categoryService: CategoryService, private subCategoryService: SubCategoryService, private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {
     this.getAllTasks();
   }
-
+//**********************************************************************************************/
+// CATEGORY  
+//**********************************************************************************************/
   //--------------------------------------------
   // ADDS CATEGORY TO DATABANK -> category.service.ts
   //--------------------------------------------
@@ -53,46 +63,12 @@ export class TasksComponent implements OnInit {
     this.categoryService.create(category); 
     this.cat='';
   }
-
-  //-------------------------------------------------------
-  // ADDS Sub-CATEGORY TO DATABANK -> subCategory.service.ts
-  //--------------------------------------------------------
-  createSubCat(obj): void {
-    let tmp = obj.cat_description;
-    let subCategory: Subcat = new Subcat();
-    let newCat = new Category();
-    
-   // subCategory.subCat_description = this.subCat;
-   //subCategory.subcat_id= obj.subcat_id; 
-   subCategory.subcat_id= obj.cat_id; 
-    //subCategory.cat_id = obj.cat_id;
-    subCategory.category = obj;
-    /**/subCategory.category.cat_description= this.subCat;
-    //this.category.ID=  this.currentUser.id;
-    // console.log("tasks-----------");    
-    // console.log(obj);
-    //console.log(subCategory);
-    
-    this.subCategories.push(subCategory);
-    newCat.cat_description = this.subCat;
-    newCat.ID = this.currentUser.id;
-    obj.subcategories.push(newCat);
-
-    this.subCategoryService.createSub(subCategory);
-   
-    this.currentSubcat = null;
-    obj.cat_description = tmp;
-    this.subCat = '';
-  }
-
+  
   //--------------------------------------------
   // DELETE BUTTON OF CATEGORY TAB
   //--------------------------------------------
   deletebtn(obj): void {
-    console.log("delete btn obj:",obj);
-    console.dir(obj);
     this.categoryService.delete(obj);
-
     this.categories.splice(this.categories.indexOf(obj), 1);
     this.headCategories.splice(this.headCategories.indexOf(obj), 1);
     this.subCategories.splice(this.subCategories.indexOf(obj), 1);
@@ -102,7 +78,6 @@ export class TasksComponent implements OnInit {
   // SAVE BUTTON UPDATE CATEGORY IN DATABASE
   //--------------------------------------------
   editTitle(obj) {
-    console.log("Auto change all data to object: update databank");
     // UPDATE DATABANK
     this.categoryService.edit(obj);
   }
@@ -131,9 +106,33 @@ export class TasksComponent implements OnInit {
     },
       err => console.log(err.message));
   }
+//**********************************************************************************************/
+// SUB-CATEGORY  
+//**********************************************************************************************/
+  //-------------------------------------------------------
+  // ADDS SUB-CATEGORY TO DATABANK -> subCategory.service.ts
+  //--------------------------------------------------------
+  createSubCat(obj): void {
+    let tmp = obj.cat_description;
+    let subCategory: Subcat = new Subcat();
+    let newCat = new Category();
+    subCategory.subcat_id= obj.cat_id; 
+    subCategory.category = obj;
+    /**/subCategory.category.cat_description= this.subCat;
+
+    this.subCategories.push(subCategory);
+    newCat.cat_description = this.subCat;
+    newCat.ID = this.currentUser.id;
+    obj.subcategories.push(newCat);
+    this.subCategoryService.createSub(subCategory);
+   
+    this.currentSubcat = null;
+    obj.cat_description = tmp;
+    this.subCat = '';
+  }
 
   //--------------------------------------------
-  // VUL CATEGORY WITH 
+  // VUL SUB-CATEGORY WITH 
   //--------------------------------------------
   vulSubcategories(rows: any){
     //console.dir(this.headCategories);
@@ -150,13 +149,56 @@ export class TasksComponent implements OnInit {
         }
     }
   }
+//**********************************************************************************************/
+// TASKS
+//**********************************************************************************************/
+  //--------------------------------------------
+  // CREATE TASK
+  //--------------------------------------------
+  createTask(objtaak){
+    let taak: Task= new Task();
+    taak.title = this.task;
+    taak.details = this.taskText;
+    taak.cat_id = objtaak.cat_id;
+    this.allTasks.push(taak);
+    this.allCatTasks.push(taak);
+  //  this.allSubCatTasks.push(taak);
+    // SEND TASK TO TASK.SERVICE.TS TO create()
+    this.taskService.createTask(taak);
+    console.log("send to taskService taak: ", taak);
+    // this.taak='';
+  }
+
+  //--------------------------------------------
+  // EDIT TASK
+  //--------------------------------------------
+
+
+
+  
+  //--------------------------------------------
+  // DELETE TASK
+  //--------------------------------------------
+ deleteTaak(obj): void {
+    this.taskService.delete(obj);
+    this.allTasks.splice(this.allTasks.indexOf(obj), 1);
+    this.allCatTasks.splice(this.allCatTasks.indexOf(obj), 1);
+   // this.allSubCatTasks.splice(this.allCatTasks.indexOf(obj), 1);
+  }
+
+
 }
+
+
+
+
 
 
 
 
 //********************************************************************************************/
 // CLASSES 
+//********************************************************************************************/
 
 export class Category {
   cat_id: number;
@@ -179,8 +221,9 @@ export class Subcat {
 export class Task {
   task_id: number;
   title: string;
-  startdate: Date;
-  enddate: Date;
+  details: string
+ // startdate: Date;
+ // enddate: Date;
   cat_id: number;
   constructor() { }
 }
