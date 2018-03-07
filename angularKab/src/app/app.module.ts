@@ -22,6 +22,7 @@ import { GameComponent } from './game/game.component';
 import { CategoryService } from './tasks/category.service';
 import { SubCategoryService } from './tasks/subCategory.service';
 import { MinesweeperComponent } from './minesweeper/model/minesweeper.component';
+import { ScoreService } from './_services/scores.service';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MinesweeperComponent } from './minesweeper/model/minesweeper.component'
         UserService,
         CategoryService,
         SubCategoryService,
+        ScoreService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,

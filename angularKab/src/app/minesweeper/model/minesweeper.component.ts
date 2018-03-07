@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Bord } from '../model/mijnenvegerTS';
+import { Bord, Score } from '../model/mijnenvegerTS';
 import { User } from '../../_models';
 import { UserService } from '../../_services/index';
+import { ScoreService } from '../../_services/scores.service';
 
 @Component({
   selector: 'minesweeper',
@@ -18,7 +19,7 @@ export class MinesweeperComponent implements OnInit {
   dataLastname: string;
   dataFirstname: string;
   dataTime: number;
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private scoreService: ScoreService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -26,28 +27,36 @@ export class MinesweeperComponent implements OnInit {
     this.dataFirstname = this.currentUser.firstName.toString();
     this.dataLastname = this.currentUser.lastName.toString();
     this.dataUsername = this.currentUser.username.toString();
+
   }
 
+
+
   sendStats() {
-    alert(this.game.seconden);
+
     this.dataFirstname = this.currentUser.firstName;
     this.dataLastname = this.currentUser.lastName;
     this.dataUsername = this.currentUser.username;
     this.dataTime = this.game.seconden;
-    let dataAllMinesweeper = [this.dataFirstname, this.dataLastname, this.dataUsername, this.dataTime];
-    console.dir(dataAllMinesweeper);
+    // console.dir(this.dataTime)
+    let score = new Score(this.dataFirstname,this.dataLastname,this.dataUsername,this.dataTime);
+    //let dataAllMinesweeper = [this.dataFirstname, this.dataLastname, this.dataUsername, this.dataTime];
+    //console.dir(dataAllMinesweeper);
+    alert("\nProficiat, " + this.dataUsername + "!\nJe bent niet ontploft!\n" + "Je deed er " + this.dataTime + " seconden over.\n\nJe gegevens worden verwerkt..");
+    this.scoreService.addScore(score).subscribe(antw => alert(antw.message));
+
   }
- 
+
   targetClick() {
-   console.dir(this.game.toString());
+    console.dir(this.game.toString());
   }
 
   start() {
     event.preventDefault();
-    this.game = new Bord(this.rijen,this.kolommen, this.bommen);
+    this.game = new Bord(this.rijen, this.kolommen, this.bommen);
   }
 
   reset() {
-    this.game = new Bord(this.rijen,this.kolommen, this.bommen);
+    this.game = new Bord(this.rijen, this.kolommen, this.bommen);
   }
 }

@@ -238,12 +238,49 @@ app.delete('/deleteCategory/:id', function (req, res) {
 
 
 //----------------------------------------------------------
+// MINESWEEPER
+//----------------------------------------------------------
+app.post('/minesweeper', function (req, res) {
+    let connection = makeConnection();
+    let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.dir(req.body)
+    console.dir(requ)
+
+  //let requ = req.body;
+  //console.dir(requ.time);
+    connection.query('INSERT INTO score (surname,firstname,username,tijd) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.time + '")', function (err, rows, fields) {
+        res.send({message: "res.end() POST ok!\n check SQL database if data is added. "});
+        connection.end();
+    });
+});
+
+app.get('/minesweeper', function (req, res) {
+    console.log('express: get top 5');
+    let requ = req.params.id;
+    let connection = makeConnection();
+        connection.query('SELECT * FROM score', function (err, rows, fields) {
+        if (!err) {
+            let result = JSON.stringify(rows);
+            console.log(result);
+
+            res.end(result)
+        }
+        else {
+            console.log('Error while performing query.');
+        }
+        connection.end();
+    });
+});
+
+//----------------------------------------------------------
 // SERVER LISTEN 
 //----------------------------------------------------------
 
 let server = app.listen(1337, '127.0.0.1', function () {
-    let host = server.address().address;
+    let host = server.address().address; 
     let port = server.address().port;
 
     console.log("Example app listening at http://%s:%s", host, port)
 });
+
+

@@ -150,6 +150,7 @@ export class Bord {
             this._spelGewonnen = true;
             /**/ clearInterval(this.timer);
             /**/ this.timer = null;
+            alert('Congrats, druk op Send Stats om je gegevens te verwerken..');
         }
     }
 
@@ -163,6 +164,7 @@ export class Bord {
                 if (this.vakken[i][j].isBom) this.vakken[i][j].toon();
             }
         }
+        alert('Je bent ontploft!\nDruk Reset Game op opnieuw te proberen..')
     }
 
     verwerkKlik(rij, kolom): void {
@@ -241,4 +243,8 @@ export class Bord {
     private aantalGevondenBommenInrij(rij: Vak[]) {
         return rij.filter((vak: Vak) => vak.isVermoedelijkBom()).length;
     }
+}
+
+export class Score{
+    constructor(public firstName: string, public lastName: string, public username: string, public time: number){}
 }

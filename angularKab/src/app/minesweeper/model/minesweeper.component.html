@@ -18,23 +18,32 @@
                     </li>
                 </ul>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <!-- <div id="title">Minesweeper</div> -->
             <br />
             <div id="'samenstellingBord'">
                 <div [ngClass]="slidecontainer">
                     Aantal kolommen:
-                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="kolommen">
                     <span [textContent]="kolommen"></span>
+                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="kolommen">
+
                 </div>
                 <div [ngClass]="slidecontainer">
                     Aantal rijen:
-                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="rijen">
                     <span [textContent]="rijen"></span>
+                    <input type="range" min="3" max="28" class="slider" [(ngModel)]="rijen">
+
                 </div>
                 <div [ngClass]="slidecontainer">
                     Aantal bommen:
-                    <input type="range" min="3" max="100" class="slider" [(ngModel)]="bommen">
                     <span [textContent]="bommen"></span>
+                    <input type="range" min="3" max="50" class="slider" [(ngModel)]="bommen">
+
                 </div>
             </div>
             <br>
@@ -84,54 +93,75 @@
             <hr />
             <table id="UserData">
                 <thead>
-                    <th><strong>Username</strong></th>
-                    <th><strong>Firstname</strong></th>
-                    <th><strong>Lastname</strong></th>
-                    <th><strong>Time</strong></th>
+                    <th>
+                        <strong>Username</strong>
+                    </th>
+                    <th>
+                        <strong>Firstname</strong>
+                    </th>
+                    <th>
+                        <strong>Lastname</strong>
+                    </th>
+                    <th>
+                        <strong>Time</strong>
+                    </th>
                 </thead>
                 <tbody>
                     <td>{{ dataUsername }}</td>
                     <td>{{ dataLastname }}</td>
                     <td>{{ dataFirstname }}</td>
                     <td *ngIf="game">{{ game.seconden }}</td>
-                </tbody>    
+                </tbody>
             </table>
             <br />
-            <button [ngClass]="'send_stats'" (click)="sendStats();">Send Stats</button>
-            <h1 id="h1">Ranking Top 3</h1>
+            <button [ngClass]="'send_stats'" (click)="sendStats();" type="submit">Send Stats</button>
+            <h1 id="h1">Ranking Top 5</h1>
             <hr />
             <table id="Top3">
                 <thead>
-                        <th></th>
-                        <th><strong>Username</strong></th>
-                        <th><strong>Tijd</strong></th>
+                    <th></th>
+                    <th>
+                        <strong>Username</strong>
+                    </th>
+                    <th>
+                        <strong>Time</strong>
+                    </th>
                 </thead>
                 <tbody>
-                        <th><strong>1</strong></th>
-                        <td></td>
-                        <td></td>
-                    </tbody>
-                    <tbody>
-                        <th><strong>2</strong></th>
-                        <td></td>
-                        <td></td>
-                    </tbody>
-                    <tbody>
-                        <th><strong>3</strong></th>
-                        <td></td>
-                        <td></td>
-                    </tbody>
+                    <th><strong>1</strong></th>
+                    <td>{{  }}</td>
+                    <td></td>
+                </tbody>
+                <tbody>
+                    <th>
+                        <strong>2</strong>
+                    </th>
+                    <td></td>
+                    <td></td>
+                </tbody>
+                <tbody>
+                    <th>
+                        <strong>3</strong>
+                    </th>
+                    <td></td>
+                    <td></td>
+                </tbody>
+                <tbody>
+                    <th>
+                        <strong>4</strong>
+                    </th>
+                    <td></td>
+                    <td></td>
+                </tbody>
+                <tbody>
+                    <th>
+                        <strong>5</strong>
+                    </th>
+                    <td></td>
+                    <td></td>
+                </tbody>
             </table>
         </div>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    </section>
+    </section>  
 </body>
