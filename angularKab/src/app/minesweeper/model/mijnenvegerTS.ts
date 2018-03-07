@@ -56,9 +56,9 @@ export class Vak {
         return this._toestand == Toestand.ongeklikt;
     }
 }
- 
+
 export class Bord {
-    private vakken: Vak[][]; 
+    private vakken: Vak[][];
     private _eindeSpel: boolean;
     private _spelGewonnen: boolean;
     private aantalBommen: number;
@@ -244,7 +244,7 @@ export class Bord {
         return rij.filter((vak: Vak) => vak.isVermoedelijkBom()).length;
     }
 }
-
-export class Score{
-    constructor(public firstName: string, public lastName: string, public username: string, public time: number){}
+ 
+export class Score {
+    constructor(public firstName: string, public lastName: string, public username: string, public time: number) { }
 }

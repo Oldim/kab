@@ -26,4 +26,8 @@ export class ScoreService {
     addScore(score: Score) {
         return this.http.post<any>('http://127.0.0.1:1337/minesweeper', score, httpOptions);
     }
+
+    topFive() {
+        return this.http.get<any>('http://127.0.0.1:1337/top5', httpOptions)
+    }
 }

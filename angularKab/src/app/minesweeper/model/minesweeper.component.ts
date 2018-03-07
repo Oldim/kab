@@ -9,6 +9,7 @@ import { ScoreService } from '../../_services/scores.service';
   templateUrl: './minesweeper.component.html',
   styleUrls: ['./minesweeper.component.css']
 })
+
 export class MinesweeperComponent implements OnInit {
   game: Bord;
   rijen: number = 10;
@@ -19,6 +20,7 @@ export class MinesweeperComponent implements OnInit {
   dataLastname: string;
   dataFirstname: string;
   dataTime: number;
+  stats: string;
   constructor(private userService: UserService, private scoreService: ScoreService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -27,10 +29,8 @@ export class MinesweeperComponent implements OnInit {
     this.dataFirstname = this.currentUser.firstName.toString();
     this.dataLastname = this.currentUser.lastName.toString();
     this.dataUsername = this.currentUser.username.toString();
-
+    this.toonStats();
   }
-
-
 
   sendStats() {
 
@@ -38,13 +38,17 @@ export class MinesweeperComponent implements OnInit {
     this.dataLastname = this.currentUser.lastName;
     this.dataUsername = this.currentUser.username;
     this.dataTime = this.game.seconden;
-    // console.dir(this.dataTime)
-    let score = new Score(this.dataFirstname,this.dataLastname,this.dataUsername,this.dataTime);
-    //let dataAllMinesweeper = [this.dataFirstname, this.dataLastname, this.dataUsername, this.dataTime];
-    //console.dir(dataAllMinesweeper);
+    let score = new Score(this.dataFirstname, this.dataLastname, this.dataUsername, this.dataTime);
     alert("\nProficiat, " + this.dataUsername + "!\nJe bent niet ontploft!\n" + "Je deed er " + this.dataTime + " seconden over.\n\nJe gegevens worden verwerkt..");
     this.scoreService.addScore(score).subscribe(antw => alert(antw.message));
+    this.toonStats();
+  }
 
+  toonStats() {
+      this.scoreService.topFive().subscribe(antw => {
+      this.stats = JSON.stringify(antw);
+    },
+      err => console.log("sdfxdsxf", err.message));
   }
 
   targetClick() {
