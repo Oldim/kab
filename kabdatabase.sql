@@ -45,7 +45,7 @@ DELETE FROM category
 WHERE cat_id >3;
 
 SELECT * FROM category
-WHERE cat_id like 4;
+WHERE cat_id like 36;
 
 UPDATE category
 SET description = 'edit_tile'
@@ -57,10 +57,14 @@ CREATE TABLE subcat (
     cat_id int,
     PRIMARY KEY (subcat_id),
     FOREIGN KEY (cat_id) REFERENCES category (cat_id),
-    FOREIGN KEY (subcat_id) REFERENCES category (cat_id)
+    FOREIGN KEY (subcat_id) REFERENCES category (cat_id) on delete cascade
 );
 
-DROP TABLE subcat;
+
+SELECT * FROM subcat;
+
+SELECT * FROM subcat
+WHERE cat_id = 36;
 
 -- create new Cat (dansen)
 INSERT INTO category (description, id) VALUES ('Gamen', '2'); -- chloe = 2
@@ -69,8 +73,7 @@ INSERT INTO category (description, id) VALUES ('Training', '1');  -- wout = 1
 INSERT INTO subcat (subcat_id, cat_id) VALUES ('2', '2'); -- 2 = hobby + chloe = 2
 INSERT INTO subcat (subcat_id, cat_id) VALUES ('1', '1'); -- 1 = sport + wout = 1
 
-SELECT * FROM subcat;
-
+DROP TABLE subcat;
 -- ---------------------------------TABEL MET 1 TAAK-----------------------------------------------
 
 
@@ -97,6 +100,12 @@ INSERT INTO task (title,details, cat_id) VALUES ('Lopen', '30min', '1');-- 1 = s
 
 SELECT * FROM task;
 
+SELECT subcat_id FROM subcat WHERE cat_id = 39; -- OK! 
+
+
+-- DELETE FROM category WHERE cat_id IN (SELECT subcat_id FROM subcat WHERE cat_id = 39);
+DELETE FROM subcat WHERE cat_id = 39;
+DELETE FROM category WHERE cat_id = 39;
 
 
 
