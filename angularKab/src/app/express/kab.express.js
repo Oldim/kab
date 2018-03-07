@@ -48,7 +48,7 @@ app.get('/user', function (req, res) {
         if (!err) {
             let result = JSON.stringify(rows);
             res.end(result)
-        }else {
+        } else {
             console.log('Error while performing query.');
         }
         connection.end();
@@ -83,7 +83,7 @@ app.post('/authenticate', function (req, res) {
         } else {
             res.send({ message: 'Password or Username is incorrect: ' });
         }
-         //res.end("res.end() POST ok!\n check SQL database if data is added. ");
+        //res.end("res.end() POST ok!\n check SQL database if data is added. ");
         connection.end();
     });
 });
@@ -112,7 +112,7 @@ app.get('/getAllCat/:id', function (req, res) {
     let connection = makeConnection();
 
     //connection.query('SELECT * FROM category WHERE id = "' + requ + '"', function (err, rows, fields) {
-        connection.query('SELECT C.*, S.cat_id AS scat_id FROM category C LEFT JOIN subcat S ON C.cat_id = S.subcat_id WHERE id = "' + requ + '"', function (err, rows, fields) {
+    connection.query('SELECT C.*, S.cat_id AS scat_id FROM category C LEFT JOIN subcat S ON C.cat_id = S.subcat_id WHERE id = "' + requ + '"', function (err, rows, fields) {
         if (!err) {
             let result = JSON.stringify(rows);
             console.log(result);
@@ -131,13 +131,13 @@ app.get('/getAllCat/:id', function (req, res) {
 //--------------------------------------------------------
 
 app.post('/createCategory', function (req, res) {
-   
-    
+
+
     let body = {};
     let connection = makeConnection();
-    console.log("reqybody",req.body);
+    console.log("reqybody", req.body);
     let requ = JSON.parse(Object.keys(req.body)[0]);
-    console.log("reqy",requ);
+    console.log("reqy", requ);
     connection.query('INSERT INTO category (description, ID) VALUES ("' + requ.cat_description + '","' + requ.ID + '")', function (err, rows, fields) {
         if (!err) {
             console.log('app.post ( SQL TYPESCRIPT category...)');
@@ -170,14 +170,14 @@ app.post('/createSubCategory', function (req, res) {
     console.log(requ);
     //var catRec= {description: 'requ.cat_description', ID: 'requ.ID'};
     //var subCatRec ={subcat_id: requ.cat_id, cat_id: requ.cat_id};
-    var subCatRec =[ requ.cat_description, requ.ID,  requ.subcat_id];
+    var subCatRec = [requ.cat_description, requ.ID, requ.subcat_id];
     var sql = "INSERT INTO category (description, ID) VALUES (?,?);";
     sql += "INSERT INTO subcat (subcat_id, cat_id) VALUES (last_insert_id(),?)";
-    connection.query(sql,subCatRec, function (err, rows, fields) {
+    connection.query(sql, subCatRec, function (err, rows, fields) {
         if (!err) {
             console.log('app.post ( SQL TYPESCRIPT category...)');
             console.log(rows.insertId);
-            
+
             body = {
                 subcat_id: rows.insertId
             };
@@ -185,7 +185,7 @@ app.post('/createSubCategory', function (req, res) {
             // GET ANSWER BACK FOR ID 
             //----------------------------------
             //res.send({ message:"sub added" });
-             res.send({ body: body });
+            res.send({ body: body });
         }
         else {
             console.log(err.message);
@@ -207,14 +207,14 @@ app.post('/editCategory', function (req, res) {
     let requ = JSON.parse(Object.keys(req.body)[0]);
     console.log('req.body', req.body);
     console.log('requ', requ);
-    connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = ' + requ.cat_id , function (err, rows, fields) {
+    connection.query('UPDATE category SET description = "' + requ.cat_description + '" WHERE cat_id = ' + requ.cat_id, function (err, rows, fields) {
         if (!err) {
             //----------------------------------
             // GET ANSWER BACK FOR ID 
             //----------------------------------
             res.send({ body: body });
             connection.end();
-        }else {
+        } else {
             console.log(err.message);
             res.send({ body: err.message });
         }
@@ -229,17 +229,29 @@ app.post('/editCategory', function (req, res) {
 
 app.delete('/deleteCategory/:id', function (req, res) {
     let connection = makeConnection();
-    var delGeg = [req.params.id, req.params.id, req.params.id];
-
-   var sql = "DELETE FROM category WHERE cat_id IN (SELECT subcat_id FROM subcat WHERE cat_id = ?);";
-    sql += "DELETE FROM subcat WHERE cat_id = ?;" ; //37
-    sql += "DELETE FROM category WHERE cat_id = ?" ; //37
-    connection.query(sql,delGeg,
- //connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
-        function (err, rows, fields) {
-            res.send({ message: "res.send() delete ok --> Check database !" });
-            connection.end();
-        });
+    var delGeg = [req.params.id];
+    connection.query("SELECT subcat_id FROM subcat WHERE cat_id = ?", [req.params.id],
+        function (err1, rows1, fields1) {
+            var sql = "";
+            if (rows1.length > 0) {
+                let baby_ids = [];
+                for (let i = 0; i < rows1.length; i++) {
+                    baby_ids.push(rows1[i].subcat_id);
+                }
+                console.dir(baby_ids);
+                let baby_ids_string = "(" + baby_ids.join() + ")";
+                console.dir(baby_ids_string);
+                sql = "DELETE FROM subcat WHERE subcat_id IN " + baby_ids_string + ";";
+                sql += "DELETE FROM category WHERE cat_id IN " + baby_ids_string + ";";
+            }
+            sql += "DELETE FROM category WHERE cat_id = ?;";
+            connection.query(sql, delGeg,
+                //connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
+                function (err, rows, fields) {
+                    res.send({ message: "res.send() delete ok --> Check database !" });
+                    connection.end();
+                });
+        })
 });
 
 //var sql = "INSERT INTO category (description, ID) VALUES (?,?);";
