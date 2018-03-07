@@ -102,7 +102,14 @@ app.post('/createUser', function (req, res) {
     let connection = makeConnection();
     let requ = JSON.parse(Object.keys(req.body)[0]);
     connection.query('INSERT INTO user (surname,firstname,username ,wachtwoord) VALUES ("' + requ.lastName + '" ,"' + requ.firstName + '","' + requ.username + '","' + requ.wachtwoord + '")', function (err, rows, fields) {
-        res.end("res.end() POST ok!\n check SQL database if data is added. ");
+        console.log(requ);
+        
+        if (err) {
+            res.send("username is already taken")
+        } else {
+            res.send({ status: 200 })
+        }
+        
         connection.end();
     });
 });
