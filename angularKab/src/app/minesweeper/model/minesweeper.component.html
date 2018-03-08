@@ -117,19 +117,13 @@
             <button [ngClass]="'send_stats'" (click)="sendStats();" type="submit">Send Stats</button>
             <h1 id="h1">Ranking Top 5</h1>
             <hr />
-            
-            <table id="Top3">
-                <thead>
-                    <th></th>
-                    <th>
-                        <strong>Improvise Please..(filter by username & tijd)</strong>
-                    </th>
-                </thead>
-                <tbody>
-                    <th><strong></strong></th>
-                    <td>{{ stats }}</td>
-                </tbody>
-            </table>
+            <table id="stats">
+                <thead><th>Username</th><th>Time    </th></thead>
+                <tr *ngFor="let stat of stats">
+                  <td>{{stat.username}}</td>
+                  <td>{{stat.tijd}}</td>
+                </tr>
+              </table>
         </div>
         <br>
     </section>  

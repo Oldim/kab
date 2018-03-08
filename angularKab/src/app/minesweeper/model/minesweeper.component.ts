@@ -20,7 +20,8 @@ export class MinesweeperComponent implements OnInit {
   dataLastname: string;
   dataFirstname: string;
   dataTime: number;
-  stats: string;
+  stats: any[];
+  userstats: string;
   constructor(private userService: UserService, private scoreService: ScoreService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -45,9 +46,14 @@ export class MinesweeperComponent implements OnInit {
   }
 
   toonStats() {
-      this.scoreService.topFive().subscribe(antw => {
-      this.stats = JSON.stringify(antw);
-    },
+      this.scoreService.topFive().subscribe(
+        data => { 
+          this.stats = (JSON.parse(data.result))
+          for (let i = 0; i < this.stats.length; i++){
+            console.log(this.stats[i])
+          }
+
+      },
       err => console.log("sdfxdsxf", err.message));
   }
 

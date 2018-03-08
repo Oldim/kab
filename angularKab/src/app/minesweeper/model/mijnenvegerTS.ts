@@ -2,7 +2,7 @@ export class Toestand {
     static readonly geklikt: number = 0;
     static readonly ongeklikt: number = 1;
     static readonly vermoedelijkbom: number = 2;
-    static readonly weetniet: number = 3
+    static readonly weetniet: number = 3 
 }
 
 export class Vak {
