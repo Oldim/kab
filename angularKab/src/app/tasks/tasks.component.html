@@ -1,56 +1,126 @@
 <!--      START SCREEN TASKS      -->
-<h3>Welcome to your task organiser!</h3>
-<h4>Name: {{currentUser.firstName}} id: {{currentUser.id}}</h4>
+
+<section class="jumbotron text-center" style="    background-color: #fff;">
+  <div class="container">
+    <h1 class="jumbotron-heading">Welcome to your task organiser!</h1>
+    <p class="lead text-muted">Name: {{currentUser.firstName}} id: {{currentUser.id}}</p>
+
+  </div>
+</section>
+
 
 
 <!--     CREATE & EDIT CATEGORY    -->
 <div id="create-edit">
   <form>
-    <label for="cat">Category: </label>
-    <input type="text" id="category" [(ngModel)]="cat" name="cat">
-    <button class="createbtn" (click)="createCategoryInDatabank()"> + </button>
+
+
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Category" aria-label="Category" aria-describedby="basic-addon2" d="category" [(ngModel)]="cat" name="cat">
+      <div class="input-group-append">
+        <button class="btn btn-primary createbtn" type="button" (click)="createCategoryInDatabank()"> Add </button>
+      </div>
+    </div>
   </form>
 </div>
+
+
 
 
 
 <!--     CATEGORY ASSEMBLY      -->
 <div id="categorylist">
   <!-- <div *ngFor="let c of categories" class="cattab"> -->
-      <div *ngFor="let c of headCategories" class="cattab">
+  <div *ngFor="let c of headCategories" class="cattab">
 
     <!-- VISIBLE WHEN CREATED -->
-    <span class="cat_title">{{c.cat_description}}</span>
-    <div class="btnExtra" id="btnExtra">
-      <button class="deletebtn" (click)="deletebtn(c)"> x </button>
-      <button class="editbtn" (click)="show = !show">edit </button>
-      <!-- <button class="btnAddSubCat" (click)="showSub = !showSub; ">Add subcategory </button> -->
-      <button class="btnAddSubCat" (click)="currentSubcat = c; ">Add subcategory </button>
 
-      <!-- <span class="subCat_title">{{ c.cat_description}}</span> -->
-      <div *ngFor="let sub of c.subcategories" class="cattab">{{sub.cat_description}} </div>
-
-    </div>
-
-    <!-- <div *ngIf="showSub"> -->
-    <div *ngIf="c == currentSubcat">
-      <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
-      <button class="btnCreate" (click)=" createSubCat(c);"> Add </button>
+      <div class="modal-content btnExtra"  id="btnExtra">
+        <div class="modal-header">
+          <h5 class="modal-title cat_title">{{c.cat_description}}</h5>
 
 
-    </div>
-    
+          <div class="input-group mb-3" *ngIf="show">
+            <input aria-describedby="basic-addon2" aria-label="Category" class="form-control cat_title" [(ngModel)]="c.cat_description" name="c.cat_description">
+            <div  class="input-group-append">
+              <button (click)="show = !show; editTitle(c);" class="btn btn-outline-secondary" type="button"> Save Cat </button>
+              <button (click)="show = !show" class="btn btn-outline-secondary createbtn" type="button"> Cancel </button>
 
-    <!-- VISIBLE WHEN IN EDIT MODUS -->
-    <div *ngIf="show">
-      <input type="text" class="cat_title" [(ngModel)]="c.cat_description" name="c.cat_description">
-      <button class="savebtn" (click)="show = !show; editTitle(c);"> save </button>
-      <button class="cancelbtn" (click)="show = !show"> cancel </button>
-    </div>
+            </div>
+          </div>
+
+
+          <button class="btn btn-outline-primary editbtn ml-3" (click)="show = !show">edit </button>
+          <button type="button" class="close" (click)="deletebtn(c)">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+
+
+
+
+
+
+
+          <!-- ADD SUB & TASK -->
+          <!-- <div *ngIf="showSub"> -->
+          <div *ngIf="c == currentSubcat">
+            <input type="text" id="subCategory" [(ngModel)]="subCat" name="subCat">
+            <button class="btnCreate" (click)=" createSubCat(c);"> save SubCat </button>
+            <!-- <button class="cancelbtn" (click)="show = !show"> cancel </button> -->
+          </div>
+
+          <!-- <div *ngIf="showTaak"> -->
+          <div *ngIf="t == currentTask">
+            <input type="text" id="task" [(ngModel)]="task" name="task">
+            <textarea [(ngModel)]="taskText">{{taskText}}</textarea>
+            <!-- <input type="date" id="dates" [(ngModel)]="dateStart" name="dateStart">
+            <input type="date" id="dates" [(ngModel)]="dateEnd" name="dateEnd"> -->
+            <button class="btnCreate" (click)="createTask(c);"> save Task </button>
+            <!-- <button class="cancelbtn" (click)="show = !show"> cancel </button> -->
+          </div>
+
+          <!-- VISIBLE WHEN IN EDIT MODUS -->
+
+
+
+          <!-- DIT KLOPT NIET: maar heb de functies en btns nodig om op te werken -->
+          <div id="Alltasks">
+
+
+            <div *ngFor="let taak of allTasks" class="input-group">
+              <input type="text" id="task" [(ngModel)]="task" name="task" class="form-control" placeholder="Task title" aria-label="Task title" aria-describedby="basic-addon2">
+              <textarea class="form-control" placeholder="Task content" aria-label="Task content" aria-describedby="basic-addon2"  [(ngModel)]="taskText">{{taak.taskText}}</textarea>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="show = !show; editTaak()">Edit</button>
+                <button (click)="deleteTaak(taak)" class="btn btn-outline-secondary" type="button"> x </button>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button class="btnAddTask btn btn-primary" (click)="currentTask = t; ">Add Task </button>
+          <button class="btnAddSubCat btn btn-secondary" (click)="currentSubcat = c; ">Add subcategory </button>
+        </div>
+      </div>
+
+
 
   </div>
 
-  <span *ngIf="categories.length === 0" id="span">You have no categories to organise...</span>
+
+  <small *ngIf="categories.length === 0" id="span" class="form-text text-danger">You have no categories to organise...</small>
 </div>
 
 
@@ -72,6 +142,9 @@
 
 </div>
 
+
+
 <div class="back">
-    <a routerLink="/home" class="btn">back</a>
+  <a routerLink="/home" class="btn btn-outline-secondary btn-sm  mt-2">Back</a>
+
 </div>

@@ -226,14 +226,31 @@ app.post('/editCategory', function (req, res) {
 //--------------------------------------------------------
 
 // First delete subCategories before deletion of Category 
-
 app.delete('/deleteCategory/:id', function (req, res) {
     let connection = makeConnection();
-    connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id),
-        function (err, rows, fields) {
-            res.send({ message: "res.send() delete ok --> Check database !" });
-            connection.end();
-        };
+    var delGeg = [req.params.id];
+    connection.query("SELECT subcat_id FROM subcat WHERE cat_id = ?", [req.params.id],
+        function (err1, rows1, fields1) {
+            var sql = "";
+            if (rows1.length > 0) {
+                let baby_ids = [];
+                for (let i = 0; i < rows1.length; i++) {
+                    baby_ids.push(rows1[i].subcat_id);
+                }
+                console.dir(baby_ids);
+                let baby_ids_string = "(" + baby_ids.join() + ")";
+                console.dir(baby_ids_string);
+                sql = "DELETE FROM subcat WHERE subcat_id IN " + baby_ids_string + ";";
+                sql += "DELETE FROM category WHERE cat_id IN " + baby_ids_string + ";";
+            }
+            sql += "DELETE FROM category WHERE cat_id = ?;";
+            connection.query(sql, delGeg,
+                //connection.query('DELETE FROM category WHERE cat_id = ' + req.params.id ),
+                function (err, rows, fields) {
+                    res.send({ message: "res.send() delete ok --> Check database !" });
+                    connection.end();
+                });
+        })
 });
 
 
@@ -281,3 +298,34 @@ let server = app.listen(1337, '127.0.0.1', function () {
 });
 
 
+app.post('/createTask', function (req, res) {
+    let body = {};
+    let connection = makeConnection();
+    let requ = JSON.parse(Object.keys(req.body)[0]);
+    console.log("app.post(/createTask)");
+    //  console.log("requ.params.cat_id: ",requ.params.cat_id);
+    console.log("requ.cat_id: ", requ.cat_id);
+
+    var taskRec = [requ.cat_id];
+    var sql = "INSERT INTO task (title,details, cat_id) VALUES ('" + requ.title + "','" + requ.details + "','?');";
+
+    // sql += "INSERT INTO subcat (subcat_id, cat_id) VALUES (last_insert_id(),?)";
+    connection.query(sql, taskRec, function (err, rows, fields) {
+        if (!err) {
+            console.log('app.post ( SQL TYPESCRIPT task...)');
+            console.log('res.send() rows.insertID: ', rows.insertId);
+            body = {
+                task_id: rows.insertId
+            };
+            //----------------------------------
+            // GET ANSWER BACK FOR ID 
+            //----------------------------------
+            res.send({ body: body });
+        }
+        else {
+            console.log(err.message);
+            res.send({ body: err.message });
+        }
+        connection.end();
+    });
+});

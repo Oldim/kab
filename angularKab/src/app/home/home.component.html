@@ -1,38 +1,33 @@
 ﻿<!-- SECOND PAGE / AFTER LOGIN  -->
 
 <!-- Greeting User -->
-<div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}! {{currentUser.id}}</h1>
-    <p>You're logged in KABproductions!!</p>
-
-    <!-- LINK TO TASK & LINK TO GAME -->
-    <h3>Navigation</h3>
-    <section>
-        <div class="taskgame">
-            <a routerLink="/tasks" class="btn">Tasks</a>
-        </div>
-        <div class="taskgame">
-            <a routerLink="/minesweeper" class="btn">Minesweeper</a>
-        </div>
-    </section>
-
-    <!-- <div [(ngModel)]={ {currentUser.id}}>
-        <div *ngIf="{{currentUser.id}} = 1">
-            <h3>Terug naar de hoofdmenu:</h3>
-            <ul>
-                <li *ngFor="let user of users">
-                    {{user.username}} ({{user.firstName}} {{user.lastName}}) -
-                    <a (click)="deleteUser(user.id)">Delete</a>
-                </li>
-            </ul>
-        </div>
-    </div> -->
 
 
-    <!-- LOGOUT -->
-    <div>
-        <br>
-        <a [routerLink]="['/login']" class="btnLog">Logout</a>
 
-    </div>
-</div>
+
+
+
+<div class="jumbotron mt-5 text-center" style="background-color: #fff;">
+    <h1 class="display-4">Hi {{currentUser.firstName}}! {{currentUser.id}}</h1>
+    <p class="lead">You're logged in KABproductions!!</p>
+    <hr class="my-4">
+    <p class="lead">
+      <a class="btn btn-primary btn-lg btn-block" href="#" role="button" routerLink="/tasks" >Tasks</a>
+      <a class="btn btn-primary btn-lg btn-block" href="#" role="button" routerLink="/minesweeper">Minesweeper</a>
+      <a class="btn btn-secondary btn-lg btn-block" href="#" role="button" [routerLink]="['/login']">Logout</a>
+  
+    </p>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

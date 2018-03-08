@@ -95,7 +95,26 @@ INSERT INTO task (title,details, cat_id) VALUES ('Lopen', '30min', '1');-- 1 = s
 -- INSERT INTO task (title,details, cat_ID) VALUES ('keeperen', '30min', '1');-- 1 = sport + wout = 1
 
 
+
+--------------------------------- TABEL RANKING -------------------------------------------------------
 SELECT * FROM task;
+
+CREATE TABLE score (
+	   surname varchar(20) NOT NULL,
+       firstname varchar(20) NOT NULL,
+       username varchar(30) NOT NULL,
+       tijd int(4)
+);
+
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Koen', 'Pannenkoek', 'KoenDePannenkoek', '15');
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Janine', 'Praline', 'Met_likeur', '18');
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Vettige', 'Swa', 'Frituur_den_draaihoek', '115');
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Krommen', 'Tak', 'Wilgje', '55');
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Baldi', 'Marreke', 'Baldimar', '12');
+INSERT INTO score (surname,firstname,username,tijd) VALUES ('Trage', 'Slak', 'Slijmpke_12', '115');
+
+SELECT * FROM score;
+DROP TABLE score;
 
 
 
